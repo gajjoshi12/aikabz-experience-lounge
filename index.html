@@ -1,0 +1,3120 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#03010a">
+<meta name="description" content="AIKABz builds AI systems that capture, follow up, and convert every lead automatically.">
+<title>AIKABz — Experience The Future of Business Automation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   GLOBAL RESET + BASE
+============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: #03010a;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+
+/* ============================================================
+   STICKY NAV
+============================================================ */
+.aikabz-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 32px;
+  background: rgba(3, 1, 10, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: background 0.3s, padding 0.3s;
+}
+.aikabz-nav.scrolled {
+  background: rgba(3, 1, 10, 0.92);
+  padding: 10px 32px;
+}
+.aikabz-nav__logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+.aikabz-nav__logo em {
+  font-style: italic;
+  background: linear-gradient(90deg, #843dff, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.aikabz-nav__links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.aikabz-nav__links a {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.7);
+  transition: color 0.2s;
+}
+.aikabz-nav__links a:hover { color: #ffffff; }
+.aikabz-nav__cta {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 100px;
+  background: linear-gradient(135deg, #7916ff 0%, #843dff 100%);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(121,22,255,0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.aikabz-nav__cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 32px rgba(121,22,255,0.6);
+}
+.aikabz-nav__toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+}
+@media (max-width: 800px) {
+  .aikabz-nav { padding: 12px 18px; }
+  .aikabz-nav__links { display: none; }
+  .aikabz-nav__cta { padding: 8px 16px; font-size: 12px; }
+}
+
+/* ============================================================
+   HERO SECTION
+============================================================ */
+.aikabz-hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #03010a;
+  font-family: 'Inter', sans-serif;
+  color: #ffffff;
+  isolation: isolate;
+  padding-top: 64px;
+}
+.aikabz-hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 30%, rgba(121,22,255,0.28) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 50% at 80% 70%, rgba(59,130,246,0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 55% 15%, rgba(236,72,153,0.15) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 80% at 50% 50%, rgba(6,0,18,1) 0%, #03010a 100%);
+  animation: bgShift 14s ease-in-out infinite alternate;
+}
+@keyframes bgShift {
+  0% { filter: hue-rotate(0deg) brightness(1); }
+  50% { filter: hue-rotate(12deg) brightness(1.08); }
+  100% { filter: hue-rotate(-8deg) brightness(1.04); }
+}
+.aikabz-hero__blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.55;
+  animation: blobFloat linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+.aikabz-hero__blob--1 {
+  width: 520px; height: 520px;
+  background: radial-gradient(circle, #7916ff 0%, transparent 70%);
+  top: -10%; left: -8%;
+  animation-duration: 22s;
+  animation-name: blobFloat1;
+}
+.aikabz-hero__blob--2 {
+  width: 420px; height: 420px;
+  background: radial-gradient(circle, #3b82f6 0%, transparent 70%);
+  bottom: 5%; right: -6%;
+  animation-duration: 28s;
+  animation-name: blobFloat2;
+}
+.aikabz-hero__blob--3 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, #ec4899 0%, transparent 70%);
+  top: 40%; left: 60%;
+  animation-duration: 18s;
+  animation-name: blobFloat3;
+  opacity: 0.35;
+}
+@keyframes blobFloat1 {
+  0%,100% { transform: translate(0,0) scale(1); }
+  33% { transform: translate(60px, 80px) scale(1.08); }
+  66% { transform: translate(-40px, 50px) scale(0.94); }
+}
+@keyframes blobFloat2 {
+  0%,100% { transform: translate(0,0) scale(1); }
+  40% { transform: translate(-80px,-60px) scale(1.1); }
+  75% { transform: translate(50px,-30px) scale(0.92); }
+}
+@keyframes blobFloat3 {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(-70px, 60px) scale(1.15); }
+}
+.aikabz-hero__noise {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  pointer-events: none;
+}
+#aikabz-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.aikabz-hero__content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 24px;
+  max-width: 960px;
+  width: 100%;
+}
+.aikabz-hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Inter', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  border: 1px solid rgba(132,61,255,0.4);
+  background: rgba(121,22,255,0.1);
+  padding: 7px 16px;
+  border-radius: 100px;
+  margin-bottom: 32px;
+  backdrop-filter: blur(8px);
+  animation: fadeSlideDown 0.9s cubic-bezier(0.22,1,0.36,1) both;
+}
+.aikabz-hero__eyebrow-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #843dff;
+  box-shadow: 0 0 8px 2px #843dff;
+  animation: pulseDot 2s ease-in-out infinite;
+}
+@keyframes pulseDot {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.7); }
+}
+.aikabz-hero__headline {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(38px, 7vw, 88px);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  margin-bottom: 28px;
+  animation: fadeSlideDown 1s 0.15s cubic-bezier(0.22,1,0.36,1) both;
+}
+.aikabz-hero__headline em {
+  font-style: normal;
+  background: linear-gradient(110deg, #843dff 10%, #ec4899 55%, #3b82f6 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 100%;
+  animation: gradientSlide 6s ease-in-out infinite alternate;
+}
+@keyframes gradientSlide {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+.aikabz-hero__sub {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(15px, 2.2vw, 21px);
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.6);
+  max-width: 620px;
+  margin-bottom: 52px;
+  animation: fadeSlideDown 1s 0.28s cubic-bezier(0.22,1,0.36,1) both;
+}
+.aikabz-hero__sub strong {
+  color: rgba(255,255,255,0.9);
+  font-weight: 500;
+}
+.aikabz-hero__stats {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 52px;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeSlideDown 1s 0.4s cubic-bezier(0.22,1,0.36,1) both;
+}
+.aikabz-hero__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 20px 28px;
+  min-width: 180px;
+  backdrop-filter: blur(12px);
+  transition: border-color 0.3s, background 0.3s;
+}
+.aikabz-hero__stat:hover {
+  border-color: rgba(132,61,255,0.5);
+  background: rgba(121,22,255,0.1);
+}
+.aikabz-hero__stat-number {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+}
+.aikabz-hero__stat-number span {
+  background: linear-gradient(90deg, #843dff, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.aikabz-hero__stat-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.45);
+  text-align: center;
+  line-height: 1.4;
+}
+.aikabz-hero__stat-divider {
+  width: 1px;
+  height: 48px;
+  background: rgba(255,255,255,0.12);
+  flex-shrink: 0;
+}
+.aikabz-hero__ctas {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeSlideDown 1s 0.52s cubic-bezier(0.22,1,0.36,1) both;
+}
+.aikabz-hero__btn {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 16px 36px;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.aikabz-hero__btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.12);
+  opacity: 0;
+  transition: opacity 0.2s;
+  border-radius: inherit;
+}
+.aikabz-hero__btn:hover::after { opacity: 1; }
+.aikabz-hero__btn:hover { transform: translateY(-2px); }
+.aikabz-hero__btn:active { transform: translateY(0); }
+.aikabz-hero__btn--primary {
+  background: linear-gradient(135deg, #7916ff 0%, #843dff 50%, #a855f7 100%);
+  color: #ffffff;
+  box-shadow: 0 0 28px rgba(121,22,255,0.55), 0 4px 24px rgba(121,22,255,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+  animation: glowPulse 3s ease-in-out infinite;
+}
+@keyframes glowPulse {
+  0%,100% { box-shadow: 0 0 28px rgba(121,22,255,0.55), 0 4px 24px rgba(121,22,255,0.3), inset 0 1px 0 rgba(255,255,255,0.2); }
+  50% { box-shadow: 0 0 48px rgba(121,22,255,0.8), 0 8px 40px rgba(121,22,255,0.45), inset 0 1px 0 rgba(255,255,255,0.2); }
+}
+.aikabz-hero__btn--primary:hover {
+  box-shadow: 0 0 56px rgba(121,22,255,0.9), 0 8px 40px rgba(121,22,255,0.5), inset 0 1px 0 rgba(255,255,255,0.25);
+  animation: none;
+}
+.aikabz-hero__btn--primary svg { transition: transform 0.25s; }
+.aikabz-hero__btn--primary:hover svg { transform: translateX(4px); }
+.aikabz-hero__btn--secondary {
+  background: transparent;
+  color: rgba(255,255,255,0.85);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  backdrop-filter: blur(8px);
+}
+.aikabz-hero__btn--secondary:hover {
+  border-color: rgba(132,61,255,0.7);
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(132,61,255,0.25);
+}
+.aikabz-hero__ticker-wrap {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  z-index: 20;
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  background: rgba(3,1,10,0.85);
+  backdrop-filter: blur(16px);
+  padding: 14px 0;
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+.aikabz-hero__ticker {
+  display: flex;
+  gap: 0;
+  width: max-content;
+  animation: tickerScroll 34s linear infinite;
+  will-change: transform;
+}
+.aikabz-hero__ticker:hover { animation-play-state: paused; }
+@keyframes tickerScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.aikabz-hero__ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 32px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  white-space: nowrap;
+  transition: color 0.3s;
+}
+.aikabz-hero__ticker-item:hover { color: rgba(255,255,255,0.85); }
+.aikabz-hero__ticker-dot {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: #843dff;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+.aikabz-hero__scroll {
+  position: absolute;
+  bottom: 72px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.4;
+  animation: scrollBounce 2.4s ease-in-out infinite, fadeSlideDown 1.2s 1s both;
+}
+.aikabz-hero__scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.7), transparent);
+}
+.aikabz-hero__scroll-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+}
+@keyframes scrollBounce {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(10px); }
+}
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 680px) {
+  .aikabz-hero__stats { gap: 8px; }
+  .aikabz-hero__stat { min-width: 140px; padding: 16px 18px; }
+  .aikabz-hero__stat-divider { display: none; }
+  .aikabz-hero__btn { padding: 14px 26px; font-size: 14px; }
+  .aikabz-hero__scroll { display: none; }
+}
+
+/* ============================================================
+   SERVICES GRID (ARSENAL)
+============================================================ */
+#aikabz-arsenal {
+  font-family: 'Inter', sans-serif;
+  background: #0a0a0f;
+  padding: 100px 20px;
+  --emerald: #00e676;
+  --blue-arz: #2979ff;
+  --purple-arz: #d500f9;
+  --amber: #ffab00;
+  --rose: #f50057;
+}
+.arz-heading { text-align: center; margin-bottom: 56px; }
+.arz-heading h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+.arz-heading h2 span {
+  background: linear-gradient(90deg,#00e676,#2979ff,#d500f9,#ffab00,#f50057);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.arz-heading p { color: #888; margin-top: 14px; font-size: 1.05rem; max-width: 580px; margin-left: auto; margin-right: auto; }
+.arz-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 48px; }
+.arz-tab {
+  padding: 9px 22px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  color: #aaa;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .22s;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  user-select: none;
+}
+.arz-tab:hover { background: rgba(255,255,255,0.09); color: #fff; }
+.arz-tab.active[data-cat="all"] { border-color: #fff; color: #fff; background: rgba(255,255,255,0.1); }
+.arz-tab.active[data-cat="revenue"] { border-color: var(--emerald); color: var(--emerald); background: rgba(0,230,118,0.1); }
+.arz-tab.active[data-cat="ops"] { border-color: var(--blue-arz); color: var(--blue-arz); background: rgba(41,121,255,0.1); }
+.arz-tab.active[data-cat="brand"] { border-color: var(--purple-arz); color: var(--purple-arz); background: rgba(213,0,249,0.1); }
+.arz-tab.active[data-cat="intel"] { border-color: var(--amber); color: var(--amber); background: rgba(255,171,0,0.1); }
+.arz-tab.active[data-cat="jaw"] { border-color: var(--rose); color: var(--rose); background: rgba(245,0,87,0.1); }
+.arz-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+@media (max-width: 1100px) { .arz-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .arz-grid { grid-template-columns: 1fr; } }
+.arz-card {
+  position: relative;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+  padding: 28px 22px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform .28s cubic-bezier(.22,1,.36,1), box-shadow .28s, opacity .3s;
+}
+.arz-card:hover { transform: translateY(-6px) scale(1.015); }
+.arz-card[data-cat="revenue"]:hover { box-shadow: 0 0 36px rgba(0,230,118,0.25); }
+.arz-card[data-cat="ops"]:hover { box-shadow: 0 0 36px rgba(41,121,255,0.25); }
+.arz-card[data-cat="brand"]:hover { box-shadow: 0 0 36px rgba(213,0,249,0.25); }
+.arz-card[data-cat="intel"]:hover { box-shadow: 0 0 36px rgba(255,171,0,0.25); }
+.arz-card[data-cat="jaw"]:hover { box-shadow: 0 0 36px rgba(245,0,87,0.25); }
+.arz-card.hidden { display: none; }
+.arz-card-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.arz-card[data-cat="revenue"] .arz-card-accent { background: linear-gradient(90deg, var(--emerald), transparent); }
+.arz-card[data-cat="ops"] .arz-card-accent { background: linear-gradient(90deg, var(--blue-arz), transparent); }
+.arz-card[data-cat="brand"] .arz-card-accent { background: linear-gradient(90deg, var(--purple-arz), transparent); }
+.arz-card[data-cat="intel"] .arz-card-accent { background: linear-gradient(90deg, var(--amber), transparent); }
+.arz-card[data-cat="jaw"] .arz-card-accent { background: linear-gradient(90deg, var(--rose), transparent); }
+.arz-badge {
+  position: absolute;
+  top: 18px; right: 18px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  opacity: 0.35;
+  color: #fff;
+}
+.arz-cat-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+.arz-card[data-cat="revenue"] .arz-cat-label { color: var(--emerald); }
+.arz-card[data-cat="ops"] .arz-cat-label { color: var(--blue-arz); }
+.arz-card[data-cat="brand"] .arz-cat-label { color: var(--purple-arz); }
+.arz-card[data-cat="intel"] .arz-cat-label { color: var(--amber); }
+.arz-card[data-cat="jaw"] .arz-cat-label { color: var(--rose); }
+.arz-card-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+}
+.arz-card-desc { font-size: 0.83rem; color: #999; line-height: 1.6; flex: 1; }
+.arz-demo-btn {
+  align-self: flex-start;
+  margin-top: 6px;
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: none;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all .2s;
+  text-transform: uppercase;
+}
+.arz-card[data-cat="revenue"] .arz-demo-btn { background: rgba(0,230,118,0.12); color: var(--emerald); border: 1px solid rgba(0,230,118,0.3); }
+.arz-card[data-cat="revenue"] .arz-demo-btn:hover { background: rgba(0,230,118,0.22); }
+.arz-card[data-cat="ops"] .arz-demo-btn { background: rgba(41,121,255,0.12); color: var(--blue-arz); border: 1px solid rgba(41,121,255,0.3); }
+.arz-card[data-cat="ops"] .arz-demo-btn:hover { background: rgba(41,121,255,0.22); }
+.arz-card[data-cat="brand"] .arz-demo-btn { background: rgba(213,0,249,0.12); color: var(--purple-arz); border: 1px solid rgba(213,0,249,0.3); }
+.arz-card[data-cat="brand"] .arz-demo-btn:hover { background: rgba(213,0,249,0.22); }
+.arz-card[data-cat="intel"] .arz-demo-btn { background: rgba(255,171,0,0.12); color: var(--amber); border: 1px solid rgba(255,171,0,0.3); }
+.arz-card[data-cat="intel"] .arz-demo-btn:hover { background: rgba(255,171,0,0.22); }
+.arz-card[data-cat="jaw"] .arz-demo-btn { background: rgba(245,0,87,0.12); color: var(--rose); border: 1px solid rgba(245,0,87,0.3); }
+.arz-card[data-cat="jaw"] .arz-demo-btn:hover { background: rgba(245,0,87,0.22); }
+
+/* ============================================================
+   DEMO MODAL SYSTEM
+============================================================ */
+#aikab-modal *{box-sizing:border-box;}
+.akb-chip{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;}
+.akb-green{background:#0d2e1a;color:#34d399;}
+.akb-blue{background:#0d1f3a;color:#60a5fa;}
+.akb-purple{background:#1e0d3a;color:#c084fc;}
+.akb-yellow{background:#2e2200;color:#fbbf24;}
+.akb-red{background:#2e0d0d;color:#f87171;}
+.akb-card{background:#161a27;border:1px solid #2a2d3a;border-radius:10px;padding:16px;}
+.akb-label{font-size:11px;color:#6b7280;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;}
+.akb-waveform{display:flex;align-items:center;gap:3px;height:40px;}
+.akb-bar{width:4px;border-radius:3px;background:#7c6af7;animation:akb-wave 1s ease-in-out infinite;}
+@keyframes akb-wave{0%,100%{transform:scaleY(.2)}50%{transform:scaleY(1)}}
+@keyframes akb-pulse{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes akb-slide-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes akb-count-up{from{opacity:0}to{opacity:1}}
+@keyframes akb-spin{to{transform:rotate(360deg)}}
+.akb-typing-cursor::after{content:'|';animation:akb-pulse 1s infinite;}
+.akb-chat-bubble{padding:10px 14px;border-radius:14px;font-size:.88rem;line-height:1.5;max-width:80%;animation:akb-slide-in .3s ease;}
+.akb-node{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;border:2px solid #2a2d3a;transition:all .4s;}
+.akb-node.active{border-color:#7c6af7;background:#1e1040;box-shadow:0 0 16px rgba(124,106,247,.5);}
+.akb-progress-bar{height:6px;border-radius:3px;background:#1e2130;overflow:hidden;}
+.akb-progress-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#7c6af7,#a855f7);transition:width 1s ease;}
+.akb-score-bar{height:8px;border-radius:4px;background:#1e2130;overflow:hidden;margin-top:4px;}
+.akb-score-fill{height:100%;border-radius:4px;transition:width 1.2s ease;}
+.akb-table th{font-size:11px;color:#6b7280;font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:6px 10px;text-align:left;}
+.akb-table td{padding:8px 10px;font-size:.84rem;border-top:1px solid #1e2130;}
+.akb-table tr:hover td{background:#161a27;}
+.akb-ticket{padding:12px;border-radius:8px;background:#161a27;border-left:3px solid #7c6af7;margin-bottom:8px;transition:all .5s;}
+.akb-ticket.resolved{border-left-color:#34d399;opacity:.65;}
+.akb-ad-card{background:#161a27;border:1px solid #2a2d3a;border-radius:8px;padding:12px;text-align:center;transition:all .3s;cursor:default;}
+.akb-ad-card.generating{border-color:#7c6af7;box-shadow:0 0 12px rgba(124,106,247,.3);}
+.akb-ad-card.done{border-color:#34d399;}
+.akb-flow-line{width:2px;background:#2a2d3a;flex:1;transition:background .4s;}
+.akb-flow-line.active{background:linear-gradient(180deg,#7c6af7,#a855f7);}
+
+/* ============================================================
+   SOCIAL PROOF / HOW IT WORKS / RISK / CTA / FOOTER
+============================================================ */
+:root {
+  --blue: #2563EB;
+  --blue-light: #3B82F6;
+  --blue-glow: rgba(37,99,235,.35);
+  --purple-sp: #7C3AED;
+  --purple-light: #A855F7;
+  --bg-dark: #050810;
+  --bg-card: rgba(255,255,255,.04);
+  --bg-card-hover: rgba(255,255,255,.07);
+  --border: rgba(255,255,255,.08);
+  --border-glow: rgba(59,130,246,.3);
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --radius: 16px;
+  --transition: all .3s cubic-bezier(.4,0,.2,1);
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.glass-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(12px);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.glass-card:hover {
+  border-color: var(--border-glow);
+  background: var(--bg-card-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(37,99,235,.15);
+}
+.section-header { text-align: center; margin-bottom: 56px; }
+.section-tag {
+  display: inline-block;
+  padding: 6px 16px;
+  background: rgba(37,99,235,.12);
+  border: 1px solid rgba(37,99,235,.25);
+  border-radius: 100px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--blue-light);
+  margin-bottom: 16px;
+}
+.section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+.section-subtitle {
+  font-size: 17px;
+  color: var(--text-secondary);
+  max-width: 580px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+.social-proof-section {
+  padding: 100px 0 80px;
+  background: linear-gradient(180deg, #050810 0%, #080D1A 100%);
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 64px;
+}
+.stat-card { padding: 36px 28px; text-align: center; }
+.stat-card.featured-stat {
+  border-color: rgba(37,99,235,.4);
+  background: rgba(37,99,235,.06);
+  box-shadow: 0 0 40px rgba(37,99,235,.12);
+}
+.stat-glow {
+  position: absolute;
+  inset: -1px;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, rgba(37,99,235,.15), rgba(124,58,237,.15));
+  z-index: 0;
+  pointer-events: none;
+}
+.stat-icon {
+  width: 56px; height: 56px;
+  background: rgba(37,99,235,.12);
+  border: 1px solid rgba(37,99,235,.2);
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px;
+  color: var(--blue-light);
+  position: relative; z-index: 1;
+}
+.stat-number {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 44px;
+  font-weight: 800;
+  letter-spacing: -.03em;
+  background: linear-gradient(135deg, var(--blue-light), var(--purple-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+  position: relative; z-index: 1;
+}
+.stat-label {
+  font-size: 15px;
+  color: var(--text-primary);
+  font-weight: 500;
+  margin-bottom: 20px;
+  position: relative; z-index: 1;
+}
+.stat-bar {
+  height: 4px;
+  background: rgba(255,255,255,.06);
+  border-radius: 4px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  position: relative; z-index: 1;
+}
+.stat-bar-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--blue), var(--purple-sp));
+  border-radius: 4px;
+  animation: fillBar 1.8s cubic-bezier(.4,0,.2,1) forwards;
+  animation-delay: .4s;
+}
+@keyframes fillBar { to { width: var(--fill); } }
+.stat-sublabel {
+  font-size: 12px;
+  color: var(--text-muted);
+  position: relative; z-index: 1;
+}
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 64px;
+}
+.testimonial-card { padding: 36px 28px; }
+.testimonial-card.featured-testimonial {
+  border-color: rgba(124,58,237,.35);
+  background: rgba(124,58,237,.05);
+}
+.testimonial-quote-mark {
+  font-size: 72px;
+  line-height: .6;
+  color: var(--blue);
+  opacity: .4;
+  font-family: Georgia, serif;
+  margin-bottom: 16px;
+}
+.testimonial-text {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: 28px;
+  font-style: italic;
+}
+.testimonial-author { display: flex; gap: 14px; align-items: center; margin-bottom: 16px; }
+.author-avatar {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--blue), var(--purple-sp));
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 14px; flex-shrink: 0;
+}
+.author-name { font-size: 15px; font-weight: 700; color: var(--text-primary); }
+.author-role { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+.author-industry { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+.testimonial-stars { color: #F59E0B; font-size: 15px; letter-spacing: 2px; }
+.logo-strip { text-align: center; }
+.logo-strip-label {
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+.logo-strip-track { overflow: hidden; width: 100%; position: relative; }
+.logo-strip-track::before,
+.logo-strip-track::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 80px;
+  z-index: 2;
+}
+.logo-strip-track::before { left: 0; background: linear-gradient(90deg, #080D1A, transparent); }
+.logo-strip-track::after { right: 0; background: linear-gradient(-90deg, #080D1A, transparent); }
+.logo-strip-inner {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  animation: scrollLogos 28s linear infinite;
+}
+@keyframes scrollLogos {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.logo-strip-track:hover .logo-strip-inner { animation-play-state: paused; }
+.company-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 20px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  transition: var(--transition);
+}
+.company-badge:hover { border-color: var(--border-glow); color: var(--text-primary); }
+
+.how-it-works-section {
+  padding: 100px 0;
+  background: linear-gradient(180deg, #080D1A 0%, #050810 100%);
+  position: relative;
+  overflow: hidden;
+}
+.how-it-works-section::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(37,99,235,.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+.steps-wrapper { position: relative; }
+.steps-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  gap: 0;
+  align-items: start;
+  position: relative;
+  z-index: 1;
+}
+.step-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+  margin-top: 80px;
+  color: var(--blue-light);
+  opacity: .5;
+}
+.step-card { padding: 36px 28px; }
+.step-card.step-active { border-color: rgba(37,99,235,.4); }
+.step-number-badge {
+  display: inline-block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  color: var(--blue-light);
+  background: rgba(37,99,235,.12);
+  border: 1px solid rgba(37,99,235,.2);
+  border-radius: 6px;
+  padding: 4px 10px;
+  margin-bottom: 20px;
+}
+.step-icon-wrap { margin-bottom: 20px; }
+.step-icon {
+  width: 64px; height: 64px;
+  background: linear-gradient(135deg, rgba(37,99,235,.15), rgba(124,58,237,.15));
+  border: 1px solid rgba(37,99,235,.2);
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--blue-light);
+}
+.step-duration {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--purple-light);
+  margin-bottom: 8px;
+}
+.step-title { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 14px; }
+.step-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.75; margin-bottom: 20px; }
+.step-bullets { list-style: none; }
+.step-bullets li {
+  font-size: 13px;
+  color: var(--text-secondary);
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.step-bullets li::before {
+  content: '→';
+  color: var(--blue-light);
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.step-tag {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 5px 12px;
+  background: rgba(37,99,235,.08);
+  border: 1px solid rgba(37,99,235,.15);
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--blue-light);
+}
+
+.risk-reversal-section { padding: 100px 0; background: var(--bg-dark); }
+.risk-inner {
+  padding: 64px 48px;
+  background: rgba(255,255,255,.025);
+  border-color: rgba(37,99,235,.15);
+  overflow: visible;
+}
+.risk-glow-bg {
+  position: absolute;
+  top: -100px; left: 50%;
+  transform: translateX(-50%);
+  width: 700px; height: 400px;
+  background: radial-gradient(ellipse at center, rgba(37,99,235,.07) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.risk-title { position: relative; z-index: 1; }
+.guarantees-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  position: relative; z-index: 1;
+}
+.guarantee-badge {
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px 28px;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+}
+.guarantee-badge:hover {
+  border-color: var(--border-glow);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(37,99,235,.15);
+}
+.guarantee-badge.featured-guarantee {
+  border-color: rgba(37,99,235,.4);
+  background: rgba(37,99,235,.06);
+  box-shadow: 0 0 40px rgba(37,99,235,.1);
+}
+.guarantee-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(37,99,235,.12), transparent 70%);
+  pointer-events: none;
+}
+.guarantee-shield {
+  width: 64px; height: 64px;
+  background: linear-gradient(135deg, rgba(37,99,235,.15), rgba(124,58,237,.15));
+  border: 1px solid rgba(37,99,235,.2);
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--blue-light);
+  margin-bottom: 24px;
+  position: relative; z-index: 1;
+}
+.guarantee-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px; font-weight: 700;
+  margin-bottom: 12px;
+  position: relative; z-index: 1;
+}
+.guarantee-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  position: relative; z-index: 1;
+}
+.guarantee-ribbon {
+  position: absolute;
+  top: 20px; right: -24px;
+  background: linear-gradient(135deg, var(--blue), var(--purple-sp));
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 5px 36px;
+  transform: rotate(45deg);
+  box-shadow: 0 4px 12px rgba(37,99,235,.4);
+}
+.guarantee-ribbon.featured-ribbon {
+  background: linear-gradient(135deg, #2563EB, #7C3AED);
+  box-shadow: 0 4px 12px rgba(124,58,237,.5);
+}
+.risk-footer-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 36px;
+  padding: 16px 24px;
+  background: rgba(255,255,255,.03);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 13px;
+  color: var(--text-muted);
+  position: relative; z-index: 1;
+}
+.risk-footer-note svg { color: var(--blue-light); flex-shrink: 0; }
+
+.final-cta-section {
+  padding: 120px 0;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.cta-gradient-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(37,99,235,.2) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 20% 100%, rgba(124,58,237,.15) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 100%, rgba(37,99,235,.12) 0%, transparent 60%),
+    #050810;
+  pointer-events: none;
+}
+.cta-particles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.cta-particle {
+  position: absolute;
+  width: 3px; height: 3px;
+  background: var(--blue-light);
+  border-radius: 50%;
+  opacity: 0;
+  animation: floatParticle 6s ease-in-out infinite;
+}
+.cta-particle:nth-child(1) { left: 10%; top: 30%; animation-delay: 0s; }
+.cta-particle:nth-child(2) { left: 25%; top: 70%; animation-delay: 1s; }
+.cta-particle:nth-child(3) { left: 70%; top: 20%; animation-delay: 2s; background: var(--purple-light); }
+.cta-particle:nth-child(4) { left: 85%; top: 60%; animation-delay: 3s; }
+.cta-particle:nth-child(5) { left: 50%; top: 80%; animation-delay: 1.5s; background: var(--purple-light); }
+@keyframes floatParticle {
+  0%,100% { opacity: 0; transform: translateY(0) scale(1); }
+  30%,70% { opacity: .6; }
+  50% { transform: translateY(-40px) scale(1.5); opacity: .8; }
+}
+.cta-container { position: relative; z-index: 1; }
+.urgency-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background: rgba(239,68,68,.1);
+  border: 1px solid rgba(239,68,68,.25);
+  border-radius: 100px;
+  font-size: 13px;
+  color: #FCA5A5;
+  margin-bottom: 36px;
+  animation: urgencyPulse 2s ease-in-out infinite;
+}
+.urgency-dot {
+  width: 8px; height: 8px;
+  background: #EF4444;
+  border-radius: 50%;
+  animation: urgencyDot 1.2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes urgencyPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(239,68,68,.2); }
+  50% { box-shadow: 0 0 0 8px rgba(239,68,68,0); }
+}
+@keyframes urgencyDot {
+  0%,100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: .7; }
+}
+.cta-headline {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 800;
+  letter-spacing: -.03em;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.cta-headline-accent {
+  background: linear-gradient(135deg, var(--blue-light) 0%, var(--purple-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.cta-subtext {
+  font-size: 18px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 48px;
+}
+.cta-button-group { margin-bottom: 32px; }
+.cta-primary-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 40px;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--purple-sp) 100%);
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  border-radius: 14px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 8px 40px rgba(37,99,235,.4), 0 0 80px rgba(37,99,235,.15);
+}
+.cta-primary-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 16px 60px rgba(37,99,235,.5), 0 0 120px rgba(37,99,235,.2);
+}
+.btn-glow {
+  position: absolute;
+  inset: -2px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(255,255,255,.15), transparent 50%);
+  pointer-events: none;
+}
+.btn-arrow {
+  font-size: 20px;
+  transition: transform .3s ease;
+}
+.cta-primary-btn:hover .btn-arrow { transform: translateX(4px); }
+.cta-contact-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.cta-contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 24px;
+  border-radius: 10px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+  border: 1px solid;
+}
+.whatsapp-btn {
+  background: rgba(37,211,102,.08);
+  border-color: rgba(37,211,102,.25);
+  color: #4ADE80;
+}
+.whatsapp-btn:hover {
+  background: rgba(37,211,102,.15);
+  border-color: rgba(37,211,102,.5);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37,211,102,.15);
+}
+.email-btn {
+  background: rgba(37,99,235,.08);
+  border-color: rgba(37,99,235,.25);
+  color: var(--blue-light);
+}
+.email-btn:hover {
+  background: rgba(37,99,235,.15);
+  border-color: rgba(37,99,235,.5);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37,99,235,.15);
+}
+.cta-micro-copy {
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: .02em;
+}
+
+.site-footer {
+  background: #030508;
+  border-top: 1px solid var(--border);
+  padding: 56px 0 36px;
+  position: relative;
+  overflow: hidden;
+}
+.footer-glow {
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 500px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--blue), var(--purple-sp), transparent);
+  opacity: .5;
+}
+.footer-container { position: relative; z-index: 1; }
+.footer-brand { text-align: center; margin-bottom: 32px; }
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  text-decoration: none;
+}
+.footer-logo-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  background: linear-gradient(135deg, var(--blue-light), var(--purple-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.footer-tagline {
+  font-size: 14px;
+  color: var(--text-muted);
+  letter-spacing: .02em;
+}
+.footer-divider {
+  height: 1px;
+  background: var(--border);
+  margin-bottom: 28px;
+}
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-copyright { font-size: 13px; color: var(--text-muted); }
+.footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+.footer-links a {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color .2s;
+}
+.footer-links a:hover { color: var(--blue-light); }
+
+/* ============================================================
+   SCROLL REVEAL
+============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   CUSTOM SCROLLBAR
+============================================================ */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0a0613; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #7916ff, #ec4899); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #843dff, #f472b6); }
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 900px) {
+  .stats-grid,
+  .testimonials-grid,
+  .guarantees-grid { grid-template-columns: 1fr; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .step-arrow { display: none; }
+  .risk-inner { padding: 40px 24px; }
+  .footer-bottom { flex-direction: column; align-items: center; text-align: center; }
+}
+@media (max-width: 600px) {
+  .social-proof-section,
+  .how-it-works-section,
+  .risk-reversal-section,
+  .final-cta-section { padding: 64px 0; }
+  .cta-contact-row { flex-direction: column; align-items: stretch; }
+  .cta-contact-btn { justify-content: center; }
+  #aikabz-arsenal { padding: 64px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     STICKY NAV
+============================================================ -->
+<nav class="aikabz-nav" id="aikabz-nav">
+  <a href="#top" class="aikabz-nav__logo">AI<em>KABz</em></a>
+  <ul class="aikabz-nav__links">
+    <li><a href="#aikabz-arsenal">Services</a></li>
+    <li><a href="#process">How It Works</a></li>
+    <li><a href="#results">Results</a></li>
+  </ul>
+  <a href="#book" class="aikabz-nav__cta">Book a Call</a>
+</nav>
+
+<!-- ============================================================
+     HERO SECTION
+============================================================ -->
+<section class="aikabz-hero" id="top" aria-label="AIKABz Hero">
+  <div class="aikabz-hero__bg"></div>
+  <div class="aikabz-hero__blob aikabz-hero__blob--1"></div>
+  <div class="aikabz-hero__blob aikabz-hero__blob--2"></div>
+  <div class="aikabz-hero__blob aikabz-hero__blob--3"></div>
+  <div class="aikabz-hero__noise"></div>
+  <canvas id="aikabz-particles"></canvas>
+
+  <div class="aikabz-hero__content">
+    <div class="aikabz-hero__eyebrow">
+      <span class="aikabz-hero__eyebrow-dot"></span>
+      AI<em style="font-style:italic;">KABZ</em> &nbsp;—&nbsp; Premium AI Agency
+    </div>
+
+    <h1 class="aikabz-hero__headline">
+      Your Business.<br>
+      <em>Fully Automated.</em><br>
+      Criminally Effective.
+    </h1>
+
+    <p class="aikabz-hero__sub">
+      <strong>20 AI-powered systems</strong> that replace entire departments —
+      deployed in weeks, not years.
+    </p>
+
+    <div class="aikabz-hero__stats" role="list">
+      <div class="aikabz-hero__stat" role="listitem">
+        <div class="aikabz-hero__stat-number"><span id="stat-hours">0</span>+</div>
+        <div class="aikabz-hero__stat-label">Hours Saved<br>Per Month</div>
+      </div>
+      <div class="aikabz-hero__stat-divider" aria-hidden="true"></div>
+      <div class="aikabz-hero__stat" role="listitem">
+        <div class="aikabz-hero__stat-number"><span id="stat-speed">0</span>x</div>
+        <div class="aikabz-hero__stat-label">Lead Response<br>Speed</div>
+      </div>
+      <div class="aikabz-hero__stat-divider" aria-hidden="true"></div>
+      <div class="aikabz-hero__stat" role="listitem">
+        <div class="aikabz-hero__stat-number"><span id="stat-tickets">0</span>%</div>
+        <div class="aikabz-hero__stat-label">Support Tickets<br>Resolved Autonomously</div>
+      </div>
+    </div>
+
+    <div class="aikabz-hero__ctas">
+      <a href="#aikabz-arsenal" class="aikabz-hero__btn aikabz-hero__btn--primary" role="button">
+        Experience The Demo
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="#book" class="aikabz-hero__btn aikabz-hero__btn--secondary" role="button">
+        Book a Strategy Call
+      </a>
+    </div>
+  </div>
+
+  <div class="aikabz-hero__scroll" aria-hidden="true">
+    <span class="aikabz-hero__scroll-label">Scroll</span>
+    <div class="aikabz-hero__scroll-line"></div>
+  </div>
+
+  <div class="aikabz-hero__ticker-wrap" aria-hidden="true">
+    <div class="aikabz-hero__ticker" id="aikabz-ticker">
+      <span class="aikabz-hero__ticker-item"><span class="aikabz-hero__ticker-dot"></span>AI Lead Capture</span>
+      <span class="aikabz-hero__ticker-item"><span class="aikabz-hero__ticker-dot"></span>Autonomous Follow-Up</span>
+      <span class="aikabz-hero__ticker-item"><span class="aikabz-hero__ticker-dot"></span>24/7 AI Support Agent</span>
+      <span class="aikabz-hero__ticker-item"><span class="aikabz-hero__ticker-dot"></span>Appointment Automation</span>
+      <span class="aikabz-hero__ticker-item"><span class="aikabz-hero__ticker-dot"></span>Revenue Recovery</span>
+      <span class="aikabz-hero__ticker-item"><span class="aikabz-hero__ticker-dot"></span>Client Re-engagement</span>
+      <span class="aikabz-hero__ticker-item"><span class="aikabz-hero__ticker-dot"></span>Pipeline Intelligence</span>
+      <span class="aikabz-hero__ticker-item"><span class="aikabz-hero__ticker-dot"></span>AI Receptionist</span>
+      <span class="aikabz-hero__ticker-item"><span class="aikabz-hero__ticker-dot"></span>Reputation Management</span>
+      <span class="aikabz-hero__ticker-item"><span class="aikabz-hero__ticker-dot"></span>Predictive Analytics</span>
+      <span class="aikabz-hero__ticker-item"><span class="aikabz-hero__ticker-dot"></span>Smart Campaigns</span>
+      <span class="aikabz-hero__ticker-item"><span class="aikabz-hero__ticker-dot"></span>Workforce Automation</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SERVICES GRID (ARSENAL)
+============================================================ -->
+<section id="aikabz-arsenal" class="reveal">
+  <div class="arz-heading">
+    <h2>The AIKABz Arsenal — <span>20 Systems That Replace Departments</span></h2>
+    <p>Every system below is deployable, revenue-attributable, and running for clients right now.</p>
+  </div>
+
+  <div class="arz-tabs">
+    <div class="arz-tab active" data-cat="all">All Systems</div>
+    <div class="arz-tab" data-cat="revenue">Revenue Generators</div>
+    <div class="arz-tab" data-cat="ops">Operations &amp; Automation</div>
+    <div class="arz-tab" data-cat="brand">Brand &amp; Content</div>
+    <div class="arz-tab" data-cat="intel">Intelligence &amp; Analytics</div>
+    <div class="arz-tab" data-cat="jaw">Jaw-Droppers</div>
+  </div>
+
+  <div class="arz-grid">
+    <div class="arz-card" data-cat="revenue">
+      <div class="arz-card-accent"></div>
+      <span class="arz-badge">01</span>
+      <div class="arz-cat-label">Revenue Generator</div>
+      <div class="arz-card-title">AI Voice Calling</div>
+      <div class="arz-card-desc">Inbound + outbound AI call agents using Vapi + ElevenLabs that handle sales calls, follow-ups, appointment booking, and objection handling 24/7.</div>
+      <button class="arz-demo-btn" data-service="1">Live Demo</button>
+    </div>
+    <div class="arz-card" data-cat="revenue">
+      <div class="arz-card-accent"></div>
+      <span class="arz-badge">02</span>
+      <div class="arz-cat-label">Revenue Generator</div>
+      <div class="arz-card-title">Lead Gen Engine</div>
+      <div class="arz-card-desc">Full-stack automated pipeline: scrape, enrich, score, and outreach using Clay + Apollo + Outscraper feeding into Instantly or Lemlist.</div>
+      <button class="arz-demo-btn" data-service="2">Live Demo</button>
+    </div>
+    <div class="arz-card" data-cat="revenue">
+      <div class="arz-card-accent"></div>
+      <span class="arz-badge">03</span>
+      <div class="arz-cat-label">Revenue Generator</div>
+      <div class="arz-card-title">AI Sales Assistant</div>
+      <div class="arz-card-desc">24/7 WhatsApp + website chat bot that qualifies leads, handles objections, books demos, and closes simple sales without a human rep.</div>
+      <button class="arz-demo-btn" data-service="3">Live Demo</button>
+    </div>
+    <div class="arz-card" data-cat="revenue">
+      <div class="arz-card-accent"></div>
+      <span class="arz-badge">04</span>
+      <div class="arz-cat-label">Revenue Generator</div>
+      <div class="arz-card-title">AI Avatar Tours</div>
+      <div class="arz-card-desc">HeyGen/Tavus personalised pitch videos at scale — ideal for real estate, luxury products, and high-ticket B2B sales.</div>
+      <button class="arz-demo-btn" data-service="4">Live Demo</button>
+    </div>
+    <div class="arz-card" data-cat="ops">
+      <div class="arz-card-accent"></div>
+      <span class="arz-badge">05</span>
+      <div class="arz-cat-label">Operations &amp; Automation</div>
+      <div class="arz-card-title">Smart Follow-Up</div>
+      <div class="arz-card-desc">Behaviour-triggered, multi-channel nurture sequences across email, WhatsApp, and SMS that adapt based on lead actions.</div>
+      <button class="arz-demo-btn" data-service="5">Live Demo</button>
+    </div>
+    <div class="arz-card" data-cat="ops">
+      <div class="arz-card-accent"></div>
+      <span class="arz-badge">06</span>
+      <div class="arz-cat-label">Operations &amp; Automation</div>
+      <div class="arz-card-title">AI Receptionist</div>
+      <div class="arz-card-desc">Handles inbound calls, schedules appointments, answers FAQs, and routes complex queries to humans — kills the need for front-desk staff.</div>
+      <button class="arz-demo-btn" data-service="6">Live Demo</button>
+    </div>
+    <div class="arz-card" data-cat="ops">
+      <div class="arz-card-accent"></div>
+      <span class="arz-badge">07</span>
+      <div class="arz-cat-label">Operations &amp; Automation</div>
+      <div class="arz-card-title">Workflow Automation</div>
+      <div class="arz-card-desc">Any manual, repetitive operation automated in n8n or Make — invoicing, data entry, reporting, internal notifications.</div>
+      <button class="arz-demo-btn" data-service="7">Live Demo</button>
+    </div>
+    <div class="arz-card" data-cat="ops">
+      <div class="arz-card-accent"></div>
+      <span class="arz-badge">08</span>
+      <div class="arz-cat-label">Operations &amp; Automation</div>
+      <div class="arz-card-title">AI Customer Support</div>
+      <div class="arz-card-desc">Resolves 70–80% of support tickets autonomously using your SOPs and FAQs, escalates edge cases with full context.</div>
+      <button class="arz-demo-btn" data-service="8">Live Demo</button>
+    </div>
+    <div class="arz-card" data-cat="brand">
+      <div class="arz-card-accent"></div>
+      <span class="arz-badge">09</span>
+      <div class="arz-cat-label">Brand &amp; Content</div>
+      <div class="arz-card-title">Content Engine</div>
+      <div class="arz-card-desc">Full AI content pipeline: ideation, scripting, short-form video, captions, and scheduling on near-zero human effort.</div>
+      <button class="arz-demo-btn" data-service="9">Live Demo</button>
+    </div>
+    <div class="arz-card" data-cat="brand">
+      <div class="arz-card-accent"></div>
+      <span class="arz-badge">10</span>
+      <div class="arz-cat-label">Brand &amp; Content</div>
+      <div class="arz-card-title">AI Ad Creative</div>
+      <div class="arz-card-desc">Generate 50 ad variants fast, test hooks and visuals using AI-generated assets paired with Meta Ads API for automated rotation.</div>
+      <button class="arz-demo-btn" data-service="10">Live Demo</button>
+    </div>
+    <div class="arz-card" data-cat="brand">
+      <div class="arz-card-accent"></div>
+      <span class="arz-badge">11</span>
+      <div class="arz-cat-label">Brand &amp; Content</div>
+      <div class="arz-card-title">Reputation Management</div>
+      <div class="arz-card-desc">Monitors Google, Yelp, and industry platforms; AI responds to reviews instantly and surfaces weekly sentiment trends.</div>
+      <button class="arz-demo-btn" data-service="11">Live Demo</button>
+    </div>
+    <div class="arz-card" data-cat="brand">
+      <div class="arz-card-accent"></div>
+      <span class="arz-badge">12</span>
+      <div class="arz-cat-label">Brand &amp; Content</div>
+      <div class="arz-card-title">AI Influencer / Spokesperson</div>
+      <div class="arz-card-desc">A permanent branded AI avatar character that generates video content any time — no shoots, no scheduling, ever.</div>
+      <button class="arz-demo-btn" data-service="12">Live Demo</button>
+    </div>
+    <div class="arz-card" data-cat="intel">
+      <div class="arz-card-accent"></div>
+      <span class="arz-badge">13</span>
+      <div class="arz-cat-label">Intelligence &amp; Analytics</div>
+      <div class="arz-card-title">AI Revenue Dashboard</div>
+      <div class="arz-card-desc">Custom real-time dashboards with natural language querying — ask "what was our CAC last month?" and get an instant answer.</div>
+      <button class="arz-demo-btn" data-service="13">Live Demo</button>
+    </div>
+    <div class="arz-card" data-cat="intel">
+      <div class="arz-card-accent"></div>
+      <span class="arz-badge">14</span>
+      <div class="arz-cat-label">Intelligence &amp; Analytics</div>
+      <div class="arz-card-title">Competitive Intelligence</div>
+      <div class="arz-card-desc">Tracks competitor pricing, ads, reviews, and positioning changes in real-time, delivers weekly automated digests.</div>
+      <button class="arz-demo-btn" data-service="14">Live Demo</button>
+    </div>
+    <div class="arz-card" data-cat="intel">
+      <div class="arz-card-accent"></div>
+      <span class="arz-badge">15</span>
+      <div class="arz-cat-label">Intelligence &amp; Analytics</div>
+      <div class="arz-card-title">Predictive Lead Scoring</div>
+      <div class="arz-card-desc">ML-powered scoring of every lead by conversion likelihood so your sales team only touches the top 20%.</div>
+      <button class="arz-demo-btn" data-service="15">Live Demo</button>
+    </div>
+    <div class="arz-card" data-cat="intel">
+      <div class="arz-card-accent"></div>
+      <span class="arz-badge">16</span>
+      <div class="arz-cat-label">Intelligence &amp; Analytics</div>
+      <div class="arz-card-title">AI Call Analytics</div>
+      <div class="arz-card-desc">Every sales call transcribed, scored, and analysed — flags losing patterns, top objections, and rep performance gaps automatically.</div>
+      <button class="arz-demo-btn" data-service="16">Live Demo</button>
+    </div>
+    <div class="arz-card" data-cat="jaw">
+      <div class="arz-card-accent"></div>
+      <span class="arz-badge">17</span>
+      <div class="arz-cat-label">Jaw-Dropper</div>
+      <div class="arz-card-title">AI Property / Product Tours</div>
+      <div class="arz-card-desc">Immersive video tours narrated by a custom AI avatar — no agent or film crew needed. Works for real estate, clinics, showrooms.</div>
+      <button class="arz-demo-btn" data-service="17">Live Demo</button>
+    </div>
+    <div class="arz-card" data-cat="jaw">
+      <div class="arz-card-accent"></div>
+      <span class="arz-badge">18</span>
+      <div class="arz-cat-label">Jaw-Dropper</div>
+      <div class="arz-card-title">AI Employee Onboarding</div>
+      <div class="arz-card-desc">New hires trained by an AI that knows all SOPs, answers questions, and quizzes comprehension — cuts onboarding from weeks to days.</div>
+      <button class="arz-demo-btn" data-service="18">Live Demo</button>
+    </div>
+    <div class="arz-card" data-cat="jaw">
+      <div class="arz-card-accent"></div>
+      <span class="arz-badge">19</span>
+      <div class="arz-cat-label">Jaw-Dropper</div>
+      <div class="arz-card-title">AI SDR as a Service</div>
+      <div class="arz-card-desc">A fully autonomous outbound sales rep that finds prospects, crafts personalised outreach, handles early objections, and books meetings 24/7.</div>
+      <button class="arz-demo-btn" data-service="19">Live Demo</button>
+    </div>
+    <div class="arz-card" data-cat="jaw">
+      <div class="arz-card-accent"></div>
+      <span class="arz-badge">20</span>
+      <div class="arz-cat-label">Jaw-Dropper</div>
+      <div class="arz-card-title">AI Knowledge Base / Co-pilot</div>
+      <div class="arz-card-desc">Upload all SOPs, contracts, and playbooks; staff asks questions in plain English and gets instant, accurate answers from company data.</div>
+      <button class="arz-demo-btn" data-service="20">Live Demo</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DEMO MODAL SHELL
+============================================================ -->
+<div id="aikab-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:9998;backdrop-filter:blur(6px);"></div>
+<div id="aikab-modal" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:9999;width:min(92vw,680px);max-height:88vh;overflow-y:auto;background:#0f1117;border:1px solid #2a2d3a;border-radius:16px;box-shadow:0 32px 80px rgba(0,0,0,.7);font-family:'Inter',system-ui,sans-serif;color:#e8eaf0;">
+  <div style="position:sticky;top:0;background:#0f1117;border-bottom:1px solid #1e2130;padding:18px 24px 16px;display:flex;align-items:center;justify-content:space-between;z-index:1;">
+    <div>
+      <div id="aikab-modal-badge" style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#7c6af7;margin-bottom:4px;"></div>
+      <h2 id="aikab-modal-title" style="margin:0;font-size:1.25rem;font-weight:700;color:#fff;font-family:'Space Grotesk',sans-serif;"></h2>
+    </div>
+    <button id="aikab-close-btn" style="background:#1e2130;border:none;color:#9ca3b0;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:background .2s;">&#10005;</button>
+  </div>
+  <div id="aikab-modal-body" style="padding:24px;"></div>
+  <div style="padding:0 24px 24px;">
+    <button id="aikab-cta-btn" style="width:100%;padding:14px;background:linear-gradient(135deg,#7c6af7,#a855f7);border:none;border-radius:10px;color:#fff;font-size:.95rem;font-weight:700;cursor:pointer;letter-spacing:.03em;transition:opacity .2s;font-family:'Space Grotesk',sans-serif;">Get This For My Business &rarr;</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     SOCIAL PROOF SECTION
+============================================================ -->
+<section class="social-proof-section reveal" id="results">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Real Results</span>
+      <h2 class="section-title">What Happens When You Deploy AIKABz</h2>
+      <p class="section-subtitle">Numbers don't lie. These are real outcomes from businesses that stopped waiting.</p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card glass-card">
+        <div class="stat-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="stat-number">2.4Cr+</div>
+        <div class="stat-label">saved in operational costs</div>
+        <div class="stat-bar"><div class="stat-bar-fill" style="--fill: 80%"></div></div>
+        <div class="stat-sublabel">Average across 12-month engagements</div>
+      </div>
+      <div class="stat-card glass-card featured-stat">
+        <div class="stat-glow"></div>
+        <div class="stat-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="stat-number">47 hrs</div>
+        <div class="stat-label">per week recovered per employee</div>
+        <div class="stat-bar"><div class="stat-bar-fill" style="--fill: 95%"></div></div>
+        <div class="stat-sublabel">Time redirected to high-value work</div>
+      </div>
+      <div class="stat-card glass-card">
+        <div class="stat-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
+        <div class="stat-number">3.2x</div>
+        <div class="stat-label">revenue growth in 6 months</div>
+        <div class="stat-bar"><div class="stat-bar-fill" style="--fill: 65%"></div></div>
+        <div class="stat-sublabel">Median across all client verticals</div>
+      </div>
+    </div>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card glass-card">
+        <div class="testimonial-quote-mark">"</div>
+        <p class="testimonial-text">We were drowning in manual invoicing, follow-ups, and reporting. AIKABz automated 80% of our back-office in three weeks. My ops team now focuses on expansion instead of spreadsheets. We crossed 1Cr revenue milestone two months ahead of target.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">RK</div>
+          <div class="author-info">
+            <div class="author-name">Rajiv Kulkarni</div>
+            <div class="author-role">Founder &amp; CEO, Kulkarni Exports Pvt. Ltd.</div>
+            <div class="author-industry">Manufacturing · 120 employees</div>
+          </div>
+        </div>
+        <div class="testimonial-stars"><span>★★★★★</span></div>
+      </div>
+
+      <div class="testimonial-card glass-card featured-testimonial">
+        <div class="testimonial-quote-mark">"</div>
+        <p class="testimonial-text">I was skeptical about AI being "too complex" for a retail chain. The AIKABz team handled everything — strategy, build, training. Within 30 days our customer support response time dropped from 4 hours to 8 minutes. NPS went from 42 to 71.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">PM</div>
+          <div class="author-info">
+            <div class="author-name">Priya Mehta</div>
+            <div class="author-role">Managing Director, Mehta Retail Group</div>
+            <div class="author-industry">Retail · 6 locations · 340 employees</div>
+          </div>
+        </div>
+        <div class="testimonial-stars"><span>★★★★★</span></div>
+      </div>
+
+      <div class="testimonial-card glass-card">
+        <div class="testimonial-quote-mark">"</div>
+        <p class="testimonial-text">Our sales team was spending 60% of time on admin — CRM updates, proposal drafts, pipeline tracking. AIKABz built us an AI layer on top of our existing tools. Now reps close 2.3x more deals with the same headcount. Best ROI decision we made this year.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">AS</div>
+          <div class="author-info">
+            <div class="author-name">Arjun Sharma</div>
+            <div class="author-role">VP Sales, NexGen Solutions</div>
+            <div class="author-industry">B2B SaaS · Series A · 85 employees</div>
+          </div>
+        </div>
+        <div class="testimonial-stars"><span>★★★★★</span></div>
+      </div>
+    </div>
+
+    <div class="logo-strip">
+      <p class="logo-strip-label">Trusted by leading businesses</p>
+      <div class="logo-strip-track">
+        <div class="logo-strip-inner">
+          <span class="company-badge">Kulkarni Exports</span>
+          <span class="company-badge">Mehta Retail Group</span>
+          <span class="company-badge">NexGen Solutions</span>
+          <span class="company-badge">Vertex Logistics</span>
+          <span class="company-badge">Pinnacle Finance</span>
+          <span class="company-badge">Orbis Healthcare</span>
+          <span class="company-badge">Axon Consulting</span>
+          <span class="company-badge">Zenith Realty</span>
+          <span class="company-badge">Kulkarni Exports</span>
+          <span class="company-badge">Mehta Retail Group</span>
+          <span class="company-badge">NexGen Solutions</span>
+          <span class="company-badge">Vertex Logistics</span>
+          <span class="company-badge">Pinnacle Finance</span>
+          <span class="company-badge">Orbis Healthcare</span>
+          <span class="company-badge">Axon Consulting</span>
+          <span class="company-badge">Zenith Realty</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     HOW IT WORKS SECTION
+============================================================ -->
+<section class="how-it-works-section reveal" id="process">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">The Process</span>
+      <h2 class="section-title">From Zero to Automated in Weeks</h2>
+      <p class="section-subtitle">No lengthy IT projects. No disruption. Just results.</p>
+    </div>
+
+    <div class="steps-wrapper">
+      <div class="steps-grid">
+        <div class="step-card glass-card step-active">
+          <div class="step-number-badge">01</div>
+          <div class="step-icon-wrap">
+            <div class="step-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l.85-.85a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+          </div>
+          <div class="step-content">
+            <div class="step-duration">30 minutes</div>
+            <h3 class="step-title">Strategy Call</h3>
+            <p class="step-desc">We map your biggest operational bottlenecks, identify your highest-ROI automation opportunities, and define the exact roadmap — no fluff, no upsells.</p>
+            <ul class="step-bullets">
+              <li>Pain point audit</li>
+              <li>ROI projection</li>
+              <li>Custom roadmap</li>
+            </ul>
+          </div>
+          <div class="step-tag">Free · No Commitment</div>
+        </div>
+
+        <div class="step-arrow">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </div>
+
+        <div class="step-card glass-card">
+          <div class="step-number-badge">02</div>
+          <div class="step-icon-wrap">
+            <div class="step-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="m9 8 2 2 4-4"/></svg>
+            </div>
+          </div>
+          <div class="step-content">
+            <div class="step-duration">2 – 4 weeks</div>
+            <h3 class="step-title">Custom Build</h3>
+            <p class="step-desc">Our engineers build, integrate, and test your AI systems end-to-end. You stay in the loop; we do the heavy lifting. Zero disruption to your current operations.</p>
+            <ul class="step-bullets">
+              <li>Full-stack integration</li>
+              <li>Staff onboarding</li>
+              <li>QA &amp; stress testing</li>
+            </ul>
+          </div>
+          <div class="step-tag">Done-For-You</div>
+        </div>
+
+        <div class="step-arrow">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </div>
+
+        <div class="step-card glass-card">
+          <div class="step-number-badge">03</div>
+          <div class="step-icon-wrap">
+            <div class="step-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+          </div>
+          <div class="step-content">
+            <div class="step-duration">Day 1 onwards</div>
+            <h3 class="step-title">Deploy &amp; Scale</h3>
+            <p class="step-desc">Go live with a dedicated success manager monitoring performance. We continuously optimize, add new automations, and scale with your growth — every quarter.</p>
+            <ul class="step-bullets">
+              <li>Live monitoring dashboard</li>
+              <li>Continuous optimization</li>
+              <li>Quarterly scaling reviews</li>
+            </ul>
+          </div>
+          <div class="step-tag">Ongoing Support</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     RISK REVERSAL SECTION
+============================================================ -->
+<section class="risk-reversal-section reveal" id="guarantee">
+  <div class="container">
+    <div class="risk-inner glass-card">
+      <div class="risk-glow-bg"></div>
+      <div class="section-header">
+        <span class="section-tag">Our Promise</span>
+        <h2 class="section-title risk-title">Zero Risk. Maximum Upside.</h2>
+        <p class="section-subtitle">We don't win unless you win. That's why every engagement comes with ironclad guarantees.</p>
+      </div>
+
+      <div class="guarantees-grid">
+        <div class="guarantee-badge">
+          <div class="guarantee-shield">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <div class="guarantee-content">
+            <h3 class="guarantee-title">30-Day Results Guarantee</h3>
+            <p class="guarantee-desc">If you don't see measurable results within 30 days of deployment, we refund 100% of your investment. No questions, no conditions.</p>
+          </div>
+          <div class="guarantee-ribbon">Guaranteed</div>
+        </div>
+
+        <div class="guarantee-badge featured-guarantee">
+          <div class="guarantee-glow"></div>
+          <div class="guarantee-shield">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <div class="guarantee-content">
+            <h3 class="guarantee-title">Done-For-You Setup</h3>
+            <p class="guarantee-desc">Your team touches nothing. We handle every integration, migration, and configuration. You approve; we execute. You're operational — not a developer.</p>
+          </div>
+          <div class="guarantee-ribbon featured-ribbon">Included</div>
+        </div>
+
+        <div class="guarantee-badge">
+          <div class="guarantee-shield">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="guarantee-content">
+            <h3 class="guarantee-title">Dedicated Success Manager</h3>
+            <p class="guarantee-desc">A named human expert owns your account. Direct line, weekly check-ins, quarterly business reviews. You're never passed to a support ticket queue.</p>
+          </div>
+          <div class="guarantee-ribbon">Always On</div>
+        </div>
+      </div>
+
+      <div class="risk-footer-note">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+        <span>All guarantees are legally documented in your engagement agreement. No fine print.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FINAL CTA SECTION
+============================================================ -->
+<section class="final-cta-section reveal" id="book">
+  <div class="cta-gradient-bg"></div>
+  <div class="cta-particles">
+    <span class="cta-particle"></span>
+    <span class="cta-particle"></span>
+    <span class="cta-particle"></span>
+    <span class="cta-particle"></span>
+    <span class="cta-particle"></span>
+  </div>
+  <div class="container cta-container">
+    <div class="urgency-bar">
+      <span class="urgency-dot"></span>
+      <span class="urgency-text">Only <strong>3 spots</strong> available this month — <strong>2 already claimed</strong></span>
+    </div>
+
+    <h2 class="cta-headline">Ready to Automate<br><span class="cta-headline-accent">Your Business?</span></h2>
+    <p class="cta-subtext">Most businesses see ROI in 30 days.<br>The only risk is waiting.</p>
+
+    <div class="cta-button-group">
+      <a href="mailto:hello@aikabz.com?subject=Strategy%20Call" class="cta-primary-btn">
+        <span class="btn-glow"></span>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Book Your Free Strategy Call
+        <span class="btn-arrow">→</span>
+      </a>
+    </div>
+
+    <div class="cta-contact-row">
+      <a href="https://wa.me/919999999999" class="cta-contact-btn whatsapp-btn" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        WhatsApp Us
+      </a>
+      <a href="mailto:hello@aikabz.com" class="cta-contact-btn email-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        hello@aikabz.com
+      </a>
+    </div>
+
+    <p class="cta-micro-copy">No credit card required · 30-min call · No obligation · 100% free</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="site-footer" id="footer">
+  <div class="footer-glow"></div>
+  <div class="container footer-container">
+    <div class="footer-brand">
+      <a href="#top" class="footer-logo">
+        <span class="footer-logo-text">AI<em style="font-style:italic;">KABz</em></span>
+      </a>
+      <p class="footer-tagline">AI systems that turn missed enquiries into booked clients — automatically.</p>
+    </div>
+
+    <div class="footer-divider"></div>
+
+    <div class="footer-bottom">
+      <p class="footer-copyright">© 2026 AI Kabz Limited. All rights reserved. · Crafted for growth. Powered by AI.</p>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#book">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     CONSOLIDATED JAVASCRIPT
+============================================================ -->
+<script>
+/* ─── Nav scroll behaviour ────────────────────────────────── */
+(function(){
+  const nav = document.getElementById('aikabz-nav');
+  if(!nav) return;
+  window.addEventListener('scroll', () => {
+    if(window.scrollY > 30) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  }, { passive: true });
+})();
+
+/* ─── Scroll Reveal (IntersectionObserver) ────────────────── */
+(function(){
+  if(!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    return;
+  }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+})();
+
+/* ─── HERO: Particle system ───────────────────────────────── */
+(function(){
+  const canvas = document.getElementById('aikabz-particles');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  const COLORS = ['rgba(132,61,255,', 'rgba(59,130,246,', 'rgba(236,72,153,', 'rgba(168,85,247,'];
+
+  function resize() {
+    W = canvas.width = canvas.offsetWidth || window.innerWidth;
+    H = canvas.height = canvas.offsetHeight || window.innerHeight;
+  }
+  function mkParticle() {
+    const col = COLORS[Math.floor(Math.random() * COLORS.length)];
+    return {
+      x: Math.random() * W, y: Math.random() * H,
+      r: Math.random() * 2.2 + 0.4,
+      vx: (Math.random() - 0.5) * 0.35,
+      vy: (Math.random() - 0.5) * 0.35,
+      alpha: Math.random() * 0.55 + 0.1,
+      dAlpha: (Math.random() - 0.5) * 0.003,
+      color: col
+    };
+  }
+  function init() {
+    resize();
+    particles = Array.from({ length: 90 }, mkParticle);
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      p.alpha += p.dAlpha;
+      if (p.alpha <= 0.05 || p.alpha >= 0.7) p.dAlpha *= -1;
+      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.color + p.alpha + ')';
+      ctx.fill();
+    });
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 90) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = 'rgba(132,61,255,' + (0.08 * (1 - dist / 90)) + ')';
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  init();
+  draw();
+  window.addEventListener('resize', resize);
+})();
+
+/* ─── HERO: Animated counters ─────────────────────────────── */
+(function(){
+  const targets = { hours: 500, speed: 10, tickets: 70 };
+  const els = {
+    hours: document.getElementById('stat-hours'),
+    speed: document.getElementById('stat-speed'),
+    tickets: document.getElementById('stat-tickets')
+  };
+  if(!els.hours) return;
+  const durations = { hours: 2200, speed: 1600, tickets: 1900 };
+  let started = false;
+  function animateCounters() {
+    Object.keys(targets).forEach(key => {
+      const start = performance.now();
+      const target = targets[key];
+      const dur = durations[key];
+      function step(now) {
+        const t = Math.min((now - start) / dur, 1);
+        const ease = 1 - Math.pow(1 - t, 3);
+        els[key].textContent = Math.round(ease * target);
+        if (t < 1) requestAnimationFrame(step);
+        else els[key].textContent = target;
+      }
+      requestAnimationFrame(step);
+    });
+  }
+  const heroEl = document.querySelector('.aikabz-hero');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && !started) {
+        started = true;
+        setTimeout(animateCounters, 600);
+        io.disconnect();
+      }
+    }, { threshold: 0.2 });
+    io.observe(heroEl);
+  } else {
+    setTimeout(animateCounters, 800);
+  }
+})();
+
+/* ─── HERO: Ticker duplicate for seamless loop ───────────── */
+(function(){
+  const ticker = document.getElementById('aikabz-ticker');
+  if (ticker) {
+    const clone = ticker.innerHTML;
+    ticker.innerHTML = clone + clone;
+  }
+})();
+
+/* ─── HERO: Magnetic CTA hover effect ─────────────────────── */
+(function(){
+  document.querySelectorAll('.aikabz-hero__btn').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const rect = btn.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = (e.clientX - cx) * 0.28;
+      const dy = (e.clientY - cy) * 0.28;
+      btn.style.transform = `translate(${dx}px, ${dy}px) translateY(-2px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+    });
+  });
+})();
+
+/* ─── ARSENAL: Tab filtering ──────────────────────────────── */
+(function(){
+  const tabs = document.querySelectorAll('.arz-tab');
+  const cards = document.querySelectorAll('.arz-card');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const cat = tab.getAttribute('data-cat');
+      cards.forEach(card => {
+        if (cat === 'all' || card.getAttribute('data-cat') === cat) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+})();
+
+/* ─── DEMO MODAL SYSTEM ───────────────────────────────────── */
+(function(){
+  const SERVICES = {
+    1:{badge:'Revenue Generators',title:'AI Voice Calling'},
+    2:{badge:'Revenue Generators',title:'Lead Gen Engine'},
+    3:{badge:'Revenue Generators',title:'AI Sales Assistant'},
+    4:{badge:'Revenue Generators',title:'AI Avatar Tours'},
+    5:{badge:'Operations & Automation',title:'Smart Follow-Up'},
+    6:{badge:'Operations & Automation',title:'AI Receptionist'},
+    7:{badge:'Operations & Automation',title:'Workflow Automation'},
+    8:{badge:'Operations & Automation',title:'AI Customer Support'},
+    9:{badge:'Brand & Content',title:'Content Engine'},
+    10:{badge:'Brand & Content',title:'AI Ad Creative'},
+    11:{badge:'Brand & Content',title:'Reputation Management'},
+    12:{badge:'Brand & Content',title:'AI Influencer / Spokesperson'},
+    13:{badge:'Intelligence & Analytics',title:'AI Revenue Dashboard'},
+    14:{badge:'Intelligence & Analytics',title:'Competitive Intelligence'},
+    15:{badge:'Intelligence & Analytics',title:'Predictive Lead Scoring'},
+    16:{badge:'Intelligence & Analytics',title:'AI Call Analytics'},
+    17:{badge:'Jaw-Droppers',title:'AI Property / Product Tours'},
+    18:{badge:'Jaw-Droppers',title:'AI Employee Onboarding'},
+    19:{badge:'Jaw-Droppers',title:'AI SDR as a Service'},
+    20:{badge:'Jaw-Droppers',title:'AI Knowledge Base / Co-pilot'},
+  };
+
+  let _timers = [];
+  function _t(fn,ms){const id=setTimeout(fn,ms);_timers.push(id);return id;}
+  function _i(fn,ms){const id=setInterval(fn,ms);_timers.push(id);return id;}
+  function clearAllTimers(){_timers.forEach(clearTimeout);_timers.forEach(clearInterval);_timers=[];}
+
+  window.aikabOpenModal = function(serviceId){
+    clearAllTimers();
+    const s = SERVICES[serviceId];
+    if(!s) return;
+    document.getElementById('aikab-modal-badge').textContent = s.badge;
+    document.getElementById('aikab-modal-title').textContent = s.title;
+    document.getElementById('aikab-modal-body').innerHTML = '';
+    document.getElementById('aikab-overlay').style.display='block';
+    document.getElementById('aikab-modal').style.display='block';
+    document.body.style.overflow='hidden';
+    const builder = BUILDERS[serviceId];
+    if(builder) builder(document.getElementById('aikab-modal-body'));
+  };
+  window.aikabCloseModal = function(){
+    clearAllTimers();
+    document.getElementById('aikab-overlay').style.display='none';
+    document.getElementById('aikab-modal').style.display='none';
+    document.body.style.overflow='';
+  };
+  window.aikabCTA = function(){
+    window.location.href = 'mailto:hello@aikabz.com?subject=I%20want%20this%20for%20my%20business';
+  };
+
+  document.getElementById('aikab-overlay').addEventListener('click', window.aikabCloseModal);
+  document.getElementById('aikab-close-btn').addEventListener('click', window.aikabCloseModal);
+  document.getElementById('aikab-cta-btn').addEventListener('click', window.aikabCTA);
+
+  document.addEventListener('click', function(e){
+    const btn = e.target.closest('[data-service]');
+    if(btn){ aikabOpenModal(parseInt(btn.dataset.service,10)); }
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key==='Escape') aikabCloseModal();
+  });
+
+  function typewriter(target,text,speed,cb){
+    let i=0;
+    const id=_i(()=>{
+      target.textContent=text.slice(0,++i)+(i<text.length?'▌':'');
+      if(i>=text.length){clearInterval(id);if(cb)cb();}
+    },speed||35);
+  }
+  function countUp(el,end,duration){
+    let start=0,step=end/((duration||1200)/40);
+    const id=_i(()=>{start=Math.min(start+step,end);el.textContent=Math.round(start).toLocaleString();if(start>=end)clearInterval(id);},40);
+  }
+  function waveformHTML(bars){
+    bars = bars || 18;
+    return Array.from({length:bars},(_,i)=>`<div class="akb-bar" style="height:${14+Math.random()*22}px;animation-delay:${(i*0.07).toFixed(2)}s"></div>`).join('');
+  }
+
+  const BUILDERS = {};
+
+  BUILDERS[1] = function(body){
+    body.innerHTML = `
+      <div class="akb-card" style="text-align:center;margin-bottom:16px;">
+        <div style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#7c6af7,#a855f7);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:2rem;box-shadow:0 0 32px rgba(124,106,247,.5);animation:akb-pulse 2s infinite;">📞</div>
+        <div style="font-size:.8rem;color:#9ca3b0;">AI Agent calling <strong style="color:#fff;">Sarah Mitchell</strong> · Inbound Sales</div>
+        <div class="akb-chip akb-green" style="margin-top:8px;">● LIVE · 02:14</div>
+        <div class="akb-waveform" style="justify-content:center;margin:14px auto 0;" id="wv1">${waveformHTML(24)}</div>
+      </div>
+      <div class="akb-card">
+        <div class="akb-label">Live Transcript</div>
+        <div id="transcript1" style="font-size:.84rem;line-height:1.8;min-height:120px;"></div>
+      </div>`;
+    const lines=[
+      {speaker:'AI Agent',color:'#c084fc',text:'Hi Sarah! Thanks for reaching out to BrightCo. I\'m Aria, your AI sales advisor. How can I help you today?'},
+      {speaker:'Sarah',color:'#60a5fa',text:'Hey, yeah — I was checking out your pricing page and had a few questions about the Pro plan.'},
+      {speaker:'AI Agent',color:'#c084fc',text:'Absolutely! The Pro plan at $299/mo includes unlimited seats, full API access, and priority support. What specifically caught your eye?'},
+      {speaker:'Sarah',color:'#60a5fa',text:'Mostly the CRM integrations. We\'re on HubSpot.'},
+      {speaker:'AI Agent',color:'#c084fc',text:'Perfect — we have a native HubSpot bi-directional sync. I can schedule a 20-minute demo for you this week. Tuesday 2pm or Thursday 10am work?'},
+    ];
+    const t=document.getElementById('transcript1');
+    let delay=400;
+    lines.forEach(l=>{
+      _t(()=>{
+        const row=document.createElement('div');
+        row.style.cssText='margin-bottom:8px;animation:akb-slide-in .3s ease;';
+        row.innerHTML=`<span style="color:${l.color};font-weight:700;font-size:.78rem;">${l.speaker}: </span><span style="color:#d1d5db;">${l.text}</span>`;
+        t.appendChild(row);
+        t.scrollTop=t.scrollHeight;
+      },delay);
+      delay+=l.text.length*28+600;
+    });
+  };
+
+  BUILDERS[2] = function(body){
+    body.innerHTML=`
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;">
+        ${['Scraped','Enriched','Scored','Outreached'].map((s,i)=>`
+          <div class="akb-card" style="text-align:center;">
+            <div class="akb-label">${s}</div>
+            <div id="lc${i}" style="font-size:1.6rem;font-weight:800;color:#fff;">0</div>
+          </div>`).join('')}
+      </div>
+      <div class="akb-card" style="margin-bottom:16px;">
+        <div class="akb-label">Pipeline Flow</div>
+        <div style="display:flex;align-items:center;gap:0;margin-top:8px;" id="pipeline2">
+          ${['🌐 Scrape','✨ Enrich','🎯 Score','📧 Outreach','✅ Reply'].map((s,i,a)=>`
+            <div style="display:flex;align-items:center;flex:1;">
+              <div class="akb-node" id="pn${i}" style="flex-shrink:0;">${s}</div>
+              ${i<a.length-1?`<div class="akb-flow-line" id="pl${i}"></div>`:''}
+            </div>`).join('')}
+        </div>
+      </div>
+      <div class="akb-card">
+        <div class="akb-label">Latest Leads Entering Pipeline</div>
+        <div id="leadfeed" style="max-height:130px;overflow:hidden;font-size:.82rem;"></div>
+      </div>`;
+    const targets=[4820,3241,2109,1876];
+    targets.forEach((v,i)=>{ _t(()=>countUp(document.getElementById('lc'+i),v,1800),i*300); });
+    [0,1,2,3,4].forEach(i=>{
+      _t(()=>{
+        const n = document.getElementById('pn'+i); if(n) n.classList.add('active');
+        if(i<4){ const l = document.getElementById('pl'+i); if(l) l.classList.add('active'); }
+      },i*400+200);
+    });
+    const names=['Daniel Reeves · VP Sales @ Nexus Corp','Maria Lopes · CEO @ GrowthLabs','James Tran · CMO @ ShiftDigital','Priya Nair · Founder @ VelocityHQ','Tom Bakker · Head of Ops @ BlueDot'];
+    let ni=0;
+    const feed=document.getElementById('leadfeed');
+    _i(()=>{
+      const d=document.createElement('div');
+      d.style.cssText='padding:5px 0;border-top:1px solid #1e2130;display:flex;justify-content:space-between;animation:akb-slide-in .3s ease;';
+      d.innerHTML=`<span style="color:#e8eaf0;">${names[ni%names.length]}</span><span class="akb-chip akb-green">Queued</span>`;
+      feed.prepend(d);
+      if(feed.children.length>5) feed.lastChild.remove();
+      ni++;
+    },1400);
+  };
+
+  BUILDERS[3] = function(body){
+    body.innerHTML=`
+      <div class="akb-card" style="background:#075e54;border-color:#128c7e;max-height:360px;display:flex;flex-direction:column;">
+        <div style="background:#054d44;padding:10px 14px;display:flex;align-items:center;gap:10px;margin:-16px -16px 12px;">
+          <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#7c6af7,#a855f7);display:flex;align-items:center;justify-content:center;font-size:1.1rem;">🤖</div>
+          <div><div style="font-weight:700;font-size:.9rem;">Aria · AI Sales Assistant</div><div style="font-size:.75rem;color:#a7f3d0;">● Online 24/7</div></div>
+        </div>
+        <div id="chat3" style="flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding-bottom:4px;"></div>
+        <div style="display:flex;gap:8px;margin-top:12px;">
+          <div style="flex:1;background:#1d3a35;border-radius:22px;padding:10px 14px;font-size:.82rem;color:#6b7280;">Type a message…</div>
+          <div style="width:36px;height:36px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;font-size:1.1rem;">➤</div>
+        </div>
+      </div>`;
+    const chat=document.getElementById('chat3');
+    const convo=[
+      {who:'user',text:'Hi, I saw your ad for the AI chatbot — how much does it cost?'},
+      {who:'ai',text:'Hey! Great timing 👋 Our AI Sales Assistant starts at $497/mo and typically pays for itself within the first 2 weeks by qualifying leads 24/7. What\'s your current monthly lead volume?'},
+      {who:'user',text:'Around 300-400 leads per month. We\'re losing a lot because we can\'t follow up fast enough.'},
+      {who:'ai',text:'That\'s a real pain — speed-to-lead is everything. Our bot responds in under 3 seconds, qualifies by budget + timeline, and books demos straight to your calendar. Want me to show you a quick demo?'},
+      {who:'user',text:'Yes please!'},
+      {who:'ai',text:'Perfect! I just sent a demo invite to your email 📅 One quick question — are you looking to replace your current reps or augment them?'},
+    ];
+    let delay=300;
+    convo.forEach(msg=>{
+      _t(()=>{
+        const bubble=document.createElement('div');
+        bubble.style.cssText=`display:flex;justify-content:${msg.who==='user'?'flex-end':'flex-start'};`;
+        const inner=document.createElement('div');
+        inner.className='akb-chat-bubble';
+        inner.style.cssText=`background:${msg.who==='user'?'#005c4b':'#1f2c34'};color:#e8eaf0;`;
+        bubble.appendChild(inner);
+        chat.appendChild(bubble);
+        chat.scrollTop=chat.scrollHeight;
+        if(msg.who==='ai'){
+          let i=0;
+          const tid=_i(()=>{
+            inner.textContent=msg.text.slice(0,++i)+(i<msg.text.length?'▌':'');
+            chat.scrollTop=chat.scrollHeight;
+            if(i>=msg.text.length) clearInterval(tid);
+          },22);
+        } else {
+          inner.textContent=msg.text;
+        }
+      },delay);
+      delay+=msg.text.length*22+800;
+    });
+  };
+
+  BUILDERS[4] = function(body){
+    body.innerHTML=`
+      <div class="akb-card" style="position:relative;overflow:hidden;padding:0;margin-bottom:16px;">
+        <div style="width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,#1a1040,#0d2040);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;">
+          <div id="avplay4" style="width:72px;height:72px;border-radius:50%;background:rgba(124,106,247,.2);border:3px solid #7c6af7;display:flex;align-items:center;justify-content:center;font-size:2.2rem;cursor:pointer;animation:akb-pulse 2s infinite;">▶</div>
+          <div style="margin-top:16px;font-size:.9rem;color:#c4b5fd;font-weight:600;" id="avstat4">Click to preview AI Avatar Tour</div>
+          <div style="position:absolute;bottom:12px;left:12px;right:12px;display:flex;align-items:center;gap:10px;">
+            <div style="flex:1;height:3px;background:#ffffff20;border-radius:2px;overflow:hidden;"><div id="progbar4" style="height:100%;width:0%;background:#7c6af7;transition:width .3s;"></div></div>
+            <span style="font-size:.75rem;color:#9ca3b0;" id="progtime4">0:00</span>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+        ${['Luxury Penthouse — Dubai','Commercial Unit — DIFC','Villa — Palm Jumeirah'].map((t,i)=>`
+          <div class="akb-card" style="padding:10px;">
+            <div style="aspect-ratio:16/9;background:linear-gradient(135deg,hsl(${230+i*20},40%,15%),hsl(${250+i*20},50%,20%));border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:6px;">🏙️</div>
+            <div style="font-size:.75rem;color:#d1d5db;font-weight:600;">${t}</div>
+            <div class="akb-chip akb-purple" style="margin-top:4px;">AI Tour Ready</div>
+          </div>`).join('')}
+      </div>`;
+    let playing=false,prog=0;
+    document.getElementById('avplay4').addEventListener('click',()=>{
+      if(playing) return;
+      playing=true;
+      document.getElementById('avplay4').textContent='⏸';
+      document.getElementById('avstat4').textContent='AI Avatar narrating — "Welcome to this stunning 3-bed penthouse…"';
+      const progId=_i(()=>{
+        prog=Math.min(prog+0.4,100);
+        document.getElementById('progbar4').style.width=prog+'%';
+        const s=Math.round(prog*1.5);
+        document.getElementById('progtime4').textContent=`0:${String(s).padStart(2,'0')}`;
+        if(prog>=100){clearInterval(progId);document.getElementById('avstat4').textContent='Tour complete ✓';}
+      },80);
+    });
+  };
+
+  BUILDERS[5] = function(body){
+    const steps=[
+      {icon:'📧',ch:'Email',time:'Day 0',msg:'Subject: Quick question about your growth goals',status:'sent'},
+      {icon:'💬',ch:'WhatsApp',time:'Day 2 · No reply',msg:'"Hey [Name], just checking if you got my note — any questions?"',status:'pending'},
+      {icon:'📱',ch:'SMS',time:'Day 4 · No reply',msg:'"Hi, last nudge from BrightCo — free 15-min consult this week?"',status:'pending'},
+      {icon:'📧',ch:'Email',time:'Day 7 · Opened 3x',msg:'Subject: [Name], here\'s the case study you asked about',status:'pending'},
+      {icon:'💬',ch:'WhatsApp',time:'Day 10 · Link clicked',msg:'"Saw you checked out the case study! Ready to explore options?"',status:'pending'},
+    ];
+    body.innerHTML=`
+      <div class="akb-card" style="margin-bottom:16px;">
+        <div class="akb-label">Trigger: New lead opted in via landing page</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:6px;">
+          <div class="akb-chip akb-green">● Active Sequence</div>
+          <div class="akb-chip akb-blue">247 contacts enrolled</div>
+        </div>
+      </div>
+      <div id="seq5">
+        ${steps.map((s,i)=>`
+          <div style="display:flex;gap:12px;margin-bottom:14px;" id="step5_${i}">
+            <div style="display:flex;flex-direction:column;align-items:center;">
+              <div style="width:36px;height:36px;border-radius:50%;background:#1e2130;border:2px solid #2a2d3a;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all .4s;" id="stepicon5_${i}">${s.icon}</div>
+              ${i<steps.length-1?'<div style="width:2px;flex:1;background:#2a2d3a;min-height:20px;margin:4px 0;" id="stepline5_'+i+'"></div>':''}
+            </div>
+            <div style="flex:1;padding-bottom:4px;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+                <span style="font-size:.8rem;font-weight:700;color:#c084fc;">${s.ch}</span>
+                <span style="font-size:.75rem;color:#6b7280;">${s.time}</span>
+                <span class="akb-chip ${s.status==='sent'?'akb-green':'akb-yellow'}" id="stepstatus5_${i}">${s.status==='sent'?'✓ Sent':'⏳ Waiting'}</span>
+              </div>
+              <div style="font-size:.83rem;color:#d1d5db;">${s.msg}</div>
+            </div>
+          </div>`).join('')}
+      </div>`;
+    steps.forEach((_,i)=>{
+      if(i===0) return;
+      _t(()=>{
+        const ic=document.getElementById('stepicon5_'+i);
+        const st=document.getElementById('stepstatus5_'+i);
+        const ln=document.getElementById('stepline5_'+(i-1));
+        if(ic){ic.style.borderColor='#7c6af7';ic.style.background='#1e1040';ic.style.boxShadow='0 0 12px rgba(124,106,247,.4)';}
+        if(ln){ln.style.background='linear-gradient(180deg,#7c6af7,#a855f7)';}
+        if(st){st.className='akb-chip akb-green';st.textContent='✓ Sent';}
+      },i*700+400);
+    });
+  };
+
+  BUILDERS[6] = function(body){
+    body.innerHTML=`
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;">
+        <div class="akb-card">
+          <div class="akb-label">Incoming Call</div>
+          <div style="display:flex;align-items:center;gap:10px;margin-top:8px;">
+            <div style="width:44px;height:44px;border-radius:50%;background:#1e1040;border:2px solid #7c6af7;display:flex;align-items:center;justify-content:center;font-size:1.3rem;animation:akb-pulse 1.5s infinite;">📞</div>
+            <div><div style="font-weight:600;font-size:.9rem;">+971 50 123 4567</div><div style="font-size:.75rem;color:#9ca3b0;">Inbound · 00:43</div></div>
+          </div>
+          <div class="akb-waveform" style="margin-top:10px;" id="wv6">${waveformHTML(16)}</div>
+        </div>
+        <div class="akb-card">
+          <div class="akb-label">AI Status</div>
+          <div id="aistatus6" style="font-size:.84rem;color:#d1d5db;margin-top:8px;min-height:60px;"></div>
+        </div>
+      </div>
+      <div class="akb-card">
+        <div class="akb-label">Appointment Booked</div>
+        <div id="calslot6" style="opacity:0;transition:opacity .5s;">
+          <div style="display:flex;align-items:center;gap:12px;margin-top:8px;">
+            <div style="width:56px;height:56px;background:#0d2e1a;border:2px solid #34d399;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+              <div style="font-size:.65rem;color:#34d399;font-weight:700;text-transform:uppercase;">Jun</div>
+              <div style="font-size:1.4rem;font-weight:800;color:#fff;line-height:1;">18</div>
+            </div>
+            <div>
+              <div style="font-weight:700;color:#fff;">Consultation — Dr. Hassan Clinic</div>
+              <div style="font-size:.82rem;color:#9ca3b0;">3:00 PM · 30 minutes · Confirmed ✓</div>
+              <div style="font-size:.78rem;color:#34d399;margin-top:2px;">SMS confirmation sent to caller</div>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    const statuses=['Greeting caller and detecting intent…','Identifying: appointment booking request','Checking calendar availability in real-time…','Found 3 open slots for this week','Asking preferred time — caller chose Tuesday 3pm','Booking confirmed and SMS dispatched ✓'];
+    const stat=document.getElementById('aistatus6');
+    let si=0;
+    const sid=_i(()=>{
+      if(si>=statuses.length){clearInterval(sid);document.getElementById('calslot6').style.opacity='1';return;}
+      stat.innerHTML=`<span style="color:#7c6af7;">▸</span> ${statuses[si++]}`;
+    },900);
+  };
+
+  BUILDERS[7] = function(body){
+    body.innerHTML=`
+      <div class="akb-card" style="margin-bottom:14px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div><div class="akb-label">n8n Workflow · Invoice Processing</div><div style="font-size:.82rem;color:#9ca3b0;margin-top:2px;">Runs automatically on email trigger</div></div>
+          <div class="akb-chip akb-green" id="wfstatus7">● Running</div>
+        </div>
+      </div>
+      <div class="akb-card" style="margin-bottom:14px;overflow-x:auto;">
+        <div style="display:flex;align-items:center;gap:0;min-width:500px;">
+          ${['📩 Receive','🔍 OCR Extract','📊 Update Sheet','💳 Pay','📧 Confirm','🗂️ Archive'].map((n,i,a)=>`
+            <div style="display:flex;align-items:center;flex:1;">
+              <div class="akb-node" id="wfn${i}" style="font-size:.75rem;flex-direction:column;width:52px;height:52px;padding:4px;">
+                <span style="font-size:1rem;">${n.split(' ')[0]}</span>
+                <span style="font-size:.6rem;color:#9ca3b0;text-align:center;">${n.split(' ').slice(1).join(' ')}</span>
+              </div>
+              ${i<a.length-1?`<div class="akb-flow-line" id="wfl${i}" style="height:2px;width:auto;"></div>`:''}
+            </div>`).join('')}
+        </div>
+      </div>
+      <div class="akb-card">
+        <div class="akb-label">Run Log</div>
+        <div id="wflog7" style="font-size:.8rem;max-height:110px;overflow-y:auto;"></div>
+      </div>`;
+    const logs=['[10:42:01] Email trigger fired — invoice from Acme Ltd','[10:42:02] OCR extracted: AED 12,450 · Net 30 · Ref #INV-2847','[10:42:03] Row added to Finance Sheet row 1,204','[10:42:04] Payment initiated via Stripe · Status: Pending','[10:42:06] Confirmation email sent to accounts@acme.com','[10:42:07] PDF archived to Google Drive /Invoices/2025/06'];
+    const logEl=document.getElementById('wflog7');
+    logs.forEach((log,i)=>{
+      _t(()=>{
+        const n = document.getElementById('wfn'+i); if(n) n.classList.add('active');
+        if(i>0){ const l = document.getElementById('wfl'+(i-1)); if(l) l.classList.add('active'); }
+        const d=document.createElement('div');
+        d.style.cssText='padding:3px 0;border-top:1px solid #1e2130;color:#9ca3b0;animation:akb-slide-in .2s ease;';
+        d.innerHTML=`<span style="color:#34d399;">${log.slice(0,12)}</span>${log.slice(12)}`;
+        logEl.appendChild(d);
+        logEl.scrollTop=logEl.scrollHeight;
+      },i*600+200);
+    });
+  };
+
+  BUILDERS[8] = function(body){
+    const tickets=[
+      {id:'#4821',user:'Ravi M.',issue:'Can\'t reset my password',priority:'high'},
+      {id:'#4822',user:'Lena K.',issue:'Billing charge dispute — $49',priority:'med'},
+      {id:'#4823',user:'Omar T.',issue:'How do I export my data?',priority:'low'},
+      {id:'#4824',user:'Priya S.',issue:'Feature request: dark mode',priority:'low'},
+      {id:'#4825',user:'Alex B.',issue:'App crashes on iOS 17.2',priority:'high'},
+    ];
+    body.innerHTML=`
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;">
+        ${[['Open',5,'akb-red'],['Resolving','…','akb-yellow'],['Resolved',0,'akb-green']].map(([l,v,c],i)=>`
+          <div class="akb-card" style="text-align:center;">
+            <div class="akb-label">${l}</div>
+            <div class="akb-chip ${c}" id="tcount${i}" style="font-size:1rem;padding:4px 12px;margin-top:4px;">${v}</div>
+          </div>`).join('')}
+      </div>
+      <div id="tickets8">
+        ${tickets.map((t,i)=>`
+          <div class="akb-ticket" id="ticket8_${i}">
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span style="font-size:.78rem;color:#6b7280;">${t.id}</span>
+                <span style="font-size:.84rem;font-weight:600;color:#e8eaf0;">${t.user}</span>
+              </div>
+              <span class="akb-chip ${t.priority==='high'?'akb-red':t.priority==='med'?'akb-yellow':'akb-blue'}">${t.priority}</span>
+            </div>
+            <div style="font-size:.82rem;color:#9ca3b0;margin-top:4px;">${t.issue}</div>
+            <div style="font-size:.75rem;margin-top:6px;color:#6b7280;" id="ticketstatus8_${i}">⏳ Queued</div>
+          </div>`).join('')}
+      </div>`;
+    let resolved=0;
+    tickets.forEach((_,i)=>{
+      _t(()=>{
+        const ts=document.getElementById('ticketstatus8_'+i);
+        if(ts) ts.innerHTML='<span style="color:#fbbf24;">🤖 AI analysing…</span>';
+        _t(()=>{
+          const tc=document.getElementById('ticket8_'+i);
+          if(ts) ts.innerHTML='<span style="color:#34d399;">✓ Auto-resolved — reply sent</span>';
+          if(tc) tc.classList.add('resolved');
+          resolved++;
+          document.getElementById('tcount0').textContent=tickets.length-resolved;
+          document.getElementById('tcount2').textContent=resolved;
+        },900);
+      },i*1100+300);
+    });
+  };
+
+  BUILDERS[9] = function(body){
+    const posts=[
+      {day:'Mon',platform:'Instagram',type:'Reel',caption:'5 signs your marketing is broken 🚨'},
+      {day:'Tue',platform:'LinkedIn',type:'Article',caption:'How we 3x\'d qualified leads in 30 days'},
+      {day:'Wed',platform:'Twitter/X',type:'Thread',caption:'The AI stack every agency needs in 2025 🧵'},
+      {day:'Thu',platform:'TikTok',type:'Video',caption:'POV: your CRM auto-updates itself 👀'},
+      {day:'Fri',platform:'Instagram',type:'Carousel',caption:'10 prompts that close deals (save this)'},
+      {day:'Sat',platform:'YouTube',type:'Short',caption:'We let AI run our social for 30 days…'},
+    ];
+    const icons={Instagram:'📸',LinkedIn:'💼','Twitter/X':'🐦',TikTok:'🎵',YouTube:'▶️'};
+    body.innerHTML=`
+      <div class="akb-card" style="margin-bottom:14px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div class="akb-label">Content Calendar — This Week</div>
+          <div class="akb-chip akb-purple" id="genstatus9">⚡ Generating…</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;" id="calcards9">
+        ${posts.map((p,i)=>`
+          <div class="akb-card" id="calcard9_${i}" style="opacity:0;transition:opacity .4s,transform .4s;transform:translateY(10px);">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+              <span style="font-size:.75rem;font-weight:700;color:#7c6af7;">${p.day}</span>
+              <span style="font-size:1rem;">${icons[p.platform]||'📱'}</span>
+            </div>
+            <div class="akb-chip akb-blue" style="margin-bottom:6px;font-size:.72rem;">${p.type}</div>
+            <div style="font-size:.78rem;color:#d1d5db;line-height:1.4;">${p.caption}</div>
+          </div>`).join('')}
+      </div>
+      <div class="akb-card" style="margin-top:14px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:.84rem;color:#9ca3b0;">Posts generated this month</span>
+          <span id="postcnt9" style="font-size:1.4rem;font-weight:800;color:#c084fc;">0</span>
+        </div>
+      </div>`;
+    posts.forEach((_,i)=>{
+      _t(()=>{
+        const c=document.getElementById('calcard9_'+i);
+        if(c){c.style.opacity='1';c.style.transform='translateY(0)';}
+      },i*380+200);
+    });
+    _t(()=>{
+      document.getElementById('genstatus9').className='akb-chip akb-green';
+      document.getElementById('genstatus9').textContent='✓ Week complete';
+    },posts.length*380+400);
+    countUp(document.getElementById('postcnt9'),84,2000);
+  };
+
+  BUILDERS[10] = function(body){
+    const variants=[
+      {hook:'Pain: "Still losing leads after 5pm?"',type:'Video Ad',ctr:'4.2%'},
+      {hook:'Curiosity: "What if your bot closed deals while you slept?"',type:'Static',ctr:'3.8%'},
+      {hook:'Social Proof: "312 businesses automated with AIKABz"',type:'Carousel',ctr:'5.1%'},
+      {hook:'Offer: "Get your first AI bot free — 14 days"',type:'Story',ctr:'6.3%'},
+      {hook:'Fear: "Your competitors already use AI sales reps"',type:'Video Ad',ctr:'4.9%'},
+      {hook:'How-to: "3-step AI pipeline that replaces 2 FTEs"',type:'Reel',ctr:'5.7%'},
+    ];
+    body.innerHTML=`
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <div><div class="akb-label">Generating 6 Ad Variants</div><div style="font-size:.8rem;color:#9ca3b0;margin-top:2px;">Hook × Visual × CTA testing matrix</div></div>
+        <div id="adprog10" class="akb-chip akb-yellow">0 / 6</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;" id="adgrid10">
+        ${variants.map((v,i)=>`
+          <div class="akb-ad-card" id="adcard10_${i}">
+            <div style="width:100%;aspect-ratio:1;border-radius:6px;background:hsl(${240+i*15},40%,16%);display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin-bottom:8px;" id="adthumb10_${i}">⏳</div>
+            <div style="font-size:.72rem;color:#6b7280;" id="adhook10_${i}">Generating…</div>
+            <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:.72rem;">
+              <span style="color:#9ca3b0;" id="adtype10_${i}"></span>
+              <span style="color:#34d399;" id="adctr10_${i}"></span>
+            </div>
+          </div>`).join('')}
+      </div>`;
+    const emojis=['🎯','💡','⭐','🔥','😱','🚀'];
+    variants.forEach((v,i)=>{
+      _t(()=>{
+        const card=document.getElementById('adcard10_'+i);
+        if(card) card.classList.add('generating');
+        _t(()=>{
+          if(card){ card.classList.remove('generating'); card.classList.add('done'); }
+          const th=document.getElementById('adthumb10_'+i);
+          if(th) th.textContent=emojis[i];
+          const hk=document.getElementById('adhook10_'+i);
+          if(hk){hk.textContent=v.hook;hk.style.color='#d1d5db';}
+          document.getElementById('adtype10_'+i).textContent=v.type;
+          document.getElementById('adctr10_'+i).textContent='CTR est. '+v.ctr;
+          document.getElementById('adprog10').textContent=(i+1)+' / 6';
+          if(i===5){document.getElementById('adprog10').className='akb-chip akb-green';document.getElementById('adprog10').textContent='✓ 6 / 6 Done';}
+        },700);
+      },i*800+200);
+    });
+  };
+
+  BUILDERS[11] = function(body){
+    const reviews=[
+      {platform:'Google',score:5,text:'"Absolutely fantastic service — highly recommend!"',sentiment:92},
+      {platform:'Yelp',score:2,text:'"Waited 45 mins, no apology from staff."',sentiment:28},
+      {platform:'Google',score:4,text:'"Great food, parking was a bit tight."',sentiment:75},
+      {platform:'TripAdvisor',score:5,text:'"Best experience in Dubai this year!"',sentiment:97},
+      {platform:'Google',score:3,text:'"Average. Expected more for the price."',sentiment:48},
+    ];
+    body.innerHTML=`
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;">
+        ${[['Avg Rating','4.3 ★','akb-green'],['Reviews This Week','47','akb-blue'],['Sentiment Score','82%','akb-purple']].map(([l,v,c])=>`
+          <div class="akb-card" style="text-align:center;">
+            <div class="akb-label">${l}</div>
+            <div class="akb-chip ${c}" style="margin-top:6px;font-size:.95rem;padding:4px 10px;">${v}</div>
+          </div>`).join('')}
+      </div>
+      <div class="akb-card">
+        <div class="akb-label">Live Review Feed — AI Responding</div>
+        <div id="revfeed11" style="margin-top:8px;"></div>
+      </div>`;
+    const feed=document.getElementById('revfeed11');
+    reviews.forEach((r,i)=>{
+      _t(()=>{
+        const d=document.createElement('div');
+        d.style.cssText='border-top:1px solid #1e2130;padding:10px 0;animation:akb-slide-in .3s ease;';
+        const stars='★'.repeat(r.score)+'☆'.repeat(5-r.score);
+        d.innerHTML=`
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+            <span style="font-size:.78rem;font-weight:700;color:#c084fc;">${r.platform}</span>
+            <span style="color:#fbbf24;font-size:.82rem;">${stars}</span>
+          </div>
+          <div style="font-size:.82rem;color:#d1d5db;margin-bottom:6px;">${r.text}</div>
+          <div class="akb-score-bar"><div class="akb-score-fill" style="width:0%;background:${r.sentiment>70?'#34d399':r.sentiment>45?'#fbbf24':'#f87171'};" id="rscore11_${i}"></div></div>
+          <div style="font-size:.72rem;color:#6b7280;margin-top:2px;">Sentiment: ${r.sentiment}%</div>
+          <div style="font-size:.75rem;color:#34d399;margin-top:4px;font-style:italic;" id="rreply11_${i}"></div>`;
+        feed.appendChild(d);
+        _t(()=>{document.getElementById('rscore11_'+i).style.width=r.sentiment+'%';},100);
+        if(r.sentiment<60){
+          _t(()=>{
+            const rep=document.getElementById('rreply11_'+i);
+            if(rep) typewriter(rep,'AI reply sent: "Thank you for the feedback. We\'d love to make this right — please DM us."',25);
+          },600);
+        }
+      },i*700+200);
+    });
+  };
+
+  BUILDERS[12] = function(body){
+    const pieces=[
+      {title:'5 AI Tools That Print Money',views:'12.4K',platform:'TikTok'},
+      {title:'How We Automate Client Onboarding',views:'8.9K',platform:'Instagram'},
+      {title:'The Future of Sales is AI',views:'21K',platform:'YouTube'},
+      {title:'Stop Hiring SDRs. Do This.',views:'16.2K',platform:'LinkedIn'},
+      {title:'AI Avatar Tour — Palm Villa',views:'9.7K',platform:'Instagram'},
+      {title:'Week in the Life of an AI Owner',views:'31K',platform:'YouTube'},
+    ];
+    body.innerHTML=`
+      <div class="akb-card" style="margin-bottom:14px;display:flex;align-items:center;gap:14px;">
+        <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#7c6af7,#a855f7);display:flex;align-items:center;justify-content:center;font-size:1.8rem;box-shadow:0 0 20px rgba(124,106,247,.4);">🤖</div>
+        <div>
+          <div style="font-weight:700;font-size:1rem;color:#fff;">Aria by AIKABz</div>
+          <div style="font-size:.8rem;color:#9ca3b0;margin-top:2px;">Branded AI Spokesperson · 47.8K followers</div>
+          <div class="akb-chip akb-green" style="margin-top:4px;">● Posting 7x/week automatically</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+        ${pieces.map((p,i)=>`
+          <div class="akb-card" style="padding:10px;">
+            <div style="aspect-ratio:9/16;background:linear-gradient(160deg,hsl(${240+i*15},45%,12%),hsl(${260+i*15},55%,18%));border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:8px;position:relative;overflow:hidden;">
+              <div style="font-size:2rem;">🤖</div>
+              <div style="position:absolute;bottom:6px;left:6px;right:6px;font-size:.6rem;color:#fff;text-align:center;font-weight:600;line-height:1.3;">${p.title}</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:.7rem;color:#9ca3b0;">${p.platform}</span>
+              <span style="font-size:.72rem;color:#c084fc;font-weight:700;">${p.views} views</span>
+            </div>
+          </div>`).join('')}
+      </div>`;
+  };
+
+  BUILDERS[13] = function(body){
+    body.innerHTML=`
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;">
+        ${[['MRR','$84,320','akb-green','+14%'],['CAC','$127','akb-blue','-8%'],['LTV:CAC','6.6x','akb-purple','+0.4x']].map(([l,v,c,d])=>`
+          <div class="akb-card" style="text-align:center;">
+            <div class="akb-label">${l}</div>
+            <div style="font-size:1.3rem;font-weight:800;color:#fff;margin-top:4px;">${v}</div>
+            <div class="akb-chip ${c}" style="margin-top:4px;font-size:.72rem;">${d} MoM</div>
+          </div>`).join('')}
+      </div>
+      <div class="akb-card" style="margin-bottom:14px;">
+        <div class="akb-label">Revenue (last 6 months)</div>
+        <div style="display:flex;align-items:flex-end;gap:6px;height:80px;margin-top:8px;">
+          ${[52,61,58,74,79,84].map((v,i)=>`
+            <div style="flex:1;background:linear-gradient(180deg,#7c6af7,#a855f7);border-radius:4px 4px 0 0;transition:height .8s ease;height:0%;position:relative;" id="bar13_${i}" data-h="${v/84*100}">
+              <div style="position:absolute;top:-18px;width:100%;text-align:center;font-size:.65rem;color:#9ca3b0;">$${v}k</div>
+            </div>`).join('')}
+        </div>
+        <div style="display:flex;gap:6px;margin-top:4px;">${['Jan','Feb','Mar','Apr','May','Jun'].map(m=>`<div style="flex:1;text-align:center;font-size:.65rem;color:#6b7280;">${m}</div>`).join('')}</div>
+      </div>
+      <div class="akb-card">
+        <div class="akb-label">Ask Your Data</div>
+        <div style="display:flex;gap:8px;margin-top:8px;">
+          <div style="flex:1;background:#1e2130;border-radius:8px;padding:10px;font-size:.82rem;color:#9ca3b0;" id="nlquery13">What was our CAC last month?</div>
+          <button style="background:#7c6af7;border:none;border-radius:8px;padding:10px;font-size:.82rem;cursor:pointer;color:#fff;" id="nlask13">Ask</button>
+        </div>
+        <div id="nlanswer13" style="margin-top:8px;font-size:.82rem;color:#34d399;min-height:20px;"></div>
+      </div>`;
+    document.querySelectorAll('[id^="bar13_"]').forEach(b=>{
+      _t(()=>{b.style.height=b.dataset.h+'%';},200);
+    });
+    function nlQuery(){
+      const a=document.getElementById('nlanswer13');
+      a.textContent='';
+      typewriter(a,'▸ Your CAC last month was $127, down 8% from $138 in April. Top acquisition channel: Paid Social (43%).',22);
+    }
+    document.getElementById('nlask13').addEventListener('click', nlQuery);
+    _t(nlQuery,1200);
+  };
+
+  BUILDERS[14] = function(body){
+    const comps=[
+      {name:'HubSpot',changes:[{type:'Price',detail:'Pro plan up $50/mo',dir:'↑',cls:'akb-red'},{type:'Feature',detail:'New AI email writer',dir:'★',cls:'akb-blue'}]},
+      {name:'Salesforce',changes:[{type:'Ad',detail:'New campaign: "AI-first CRM"',dir:'📢',cls:'akb-yellow'},{type:'Review',detail:'G2 rating dipped 0.2',dir:'↓',cls:'akb-green'}]},
+      {name:'Zoho',changes:[{type:'Price',detail:'Startup tier dropped 20%',dir:'↓',cls:'akb-red'},{type:'Content',detail:'12 new SEO pages this week',dir:'↑',cls:'akb-yellow'}]},
+    ];
+    body.innerHTML=`
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <div class="akb-label">Competitor Radar — Updated 2h ago</div>
+        <div class="akb-chip akb-green">● Live Tracking</div>
+      </div>
+      ${comps.map((c,ci)=>`
+        <div class="akb-card" style="margin-bottom:12px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+            <div style="font-weight:700;font-size:.95rem;color:#fff;">${c.name}</div>
+            <div class="akb-chip akb-blue">${c.changes.length} changes detected</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;" id="ccomp${ci}">
+            ${c.changes.map((ch,i)=>`
+              <div style="display:flex;align-items:center;gap:10px;padding:8px;background:#0f1117;border-radius:6px;opacity:0;transition:opacity .4s;" id="cchange_${ci}_${i}">
+                <span class="akb-chip ${ch.cls}" style="font-size:1rem;padding:4px 8px;">${ch.dir}</span>
+                <div>
+                  <div style="font-size:.72rem;color:#6b7280;font-weight:700;text-transform:uppercase;">${ch.type}</div>
+                  <div style="font-size:.82rem;color:#d1d5db;">${ch.detail}</div>
+                </div>
+              </div>`).join('')}
+          </div>
+        </div>`).join('')}
+      <div class="akb-card" style="margin-top:4px;">
+        <div class="akb-label">Weekly Digest</div>
+        <div style="font-size:.82rem;color:#d1d5db;margin-top:6px;" id="digest14"></div>
+      </div>`;
+    comps.forEach((c,ci)=>{
+      c.changes.forEach((_,i)=>{
+        _t(()=>{document.getElementById(`cchange_${ci}_${i}`).style.opacity='1';},ci*600+i*300+200);
+      });
+    });
+    _t(()=>{
+      typewriter(document.getElementById('digest14'),'Summary: HubSpot raised prices (opportunity to position on value). Salesforce pushing AI messaging hard — update your differentiation copy. Zoho discounting aggressively at startup tier.',30);
+    },1800);
+  };
+
+  BUILDERS[15] = function(body){
+    const leads=[
+      {name:'Marcus Webb',co:'TechFlow Inc.',score:94,conv:'68%',tier:'Hot'},
+      {name:'Priya Nair',co:'Velocity HQ',score:87,conv:'54%',tier:'Hot'},
+      {name:'James Tran',co:'ShiftDigital',score:79,conv:'41%',tier:'Warm'},
+      {name:'Elena Kovač',co:'BlueDot GmbH',score:71,conv:'33%',tier:'Warm'},
+      {name:'Sam Okafor',co:'Nexus Corp',score:58,conv:'22%',tier:'Cool'},
+      {name:'Dana Mills',co:'Orbit SaaS',score:41,conv:'11%',tier:'Cold'},
+    ];
+    const tierColor={Hot:'akb-red',Warm:'akb-yellow',Cool:'akb-blue',Cold:'akb-green'};
+    body.innerHTML=`
+      <div class="akb-card" style="margin-bottom:14px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div class="akb-label">ML Lead Leaderboard</div>
+          <div class="akb-chip akb-purple">Model accuracy: 91.4%</div>
+        </div>
+      </div>
+      <div class="akb-card">
+        <table class="akb-table" style="width:100%;border-collapse:collapse;">
+          <thead><tr>
+            <th>#</th><th>Lead</th><th>Score</th><th>Conv %</th><th>Tier</th>
+          </tr></thead>
+          <tbody id="leadtable15">
+            ${leads.map((l,i)=>`
+              <tr id="lrow15_${i}" style="opacity:0;transition:opacity .3s;">
+                <td style="color:#6b7280;">${i+1}</td>
+                <td><div style="font-weight:600;font-size:.85rem;color:#fff;">${l.name}</div><div style="font-size:.75rem;color:#6b7280;">${l.co}</div></td>
+                <td>
+                  <div style="font-weight:700;color:#c084fc;">${l.score}</div>
+                  <div class="akb-score-bar" style="width:70px;"><div class="akb-score-fill" style="width:0%;background:${l.score>80?'#c084fc':l.score>60?'#fbbf24':'#60a5fa'};" id="lscore15_${i}"></div></div>
+                </td>
+                <td style="font-weight:600;color:#34d399;">${l.conv}</td>
+                <td><span class="akb-chip ${tierColor[l.tier]}">${l.tier}</span></td>
+              </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>`;
+    leads.forEach((_,i)=>{
+      _t(()=>{
+        document.getElementById('lrow15_'+i).style.opacity='1';
+        _t(()=>{document.getElementById('lscore15_'+i).style.width=leads[i].score+'%';},100);
+      },i*200+300);
+    });
+  };
+
+  BUILDERS[16] = function(body){
+    const turns=[
+      {who:'Rep',text:'Hey John, thanks for jumping on. So you saw our ad for the AI sales tool?',score:null},
+      {who:'Prospect',text:'Yeah, looked interesting. But honestly we\'ve tried automation before and it didn\'t stick.',score:null},
+      {who:'Rep',text:'I get that — what specifically didn\'t work?',score:{label:'Good discovery Q',color:'#34d399'}},
+      {who:'Prospect',text:'It was too rigid. Our sales process is pretty custom.',score:null},
+      {who:'Rep',text:'Totally fair. Ours adapts — it learns your playbook. Can I show you a 2-min demo?',score:{label:'Strong pivot',color:'#60a5fa'}},
+      {who:'Prospect',text:'Sure, go ahead.',score:null},
+    ];
+    body.innerHTML=`
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;">
+        ${[['Call Score','74/100','akb-yellow'],['Talk Ratio','42:58','akb-blue'],['Objections','2 flagged','akb-red']].map(([l,v,c])=>`
+          <div class="akb-card" style="text-align:center;">
+            <div class="akb-label">${l}</div>
+            <div class="akb-chip ${c}" style="font-size:.9rem;margin-top:6px;padding:4px 10px;">${v}</div>
+          </div>`).join('')}
+      </div>
+      <div class="akb-card">
+        <div class="akb-label">Transcript with AI Annotations</div>
+        <div id="transcript16" style="margin-top:8px;max-height:180px;overflow-y:auto;"></div>
+      </div>`;
+    const t=document.getElementById('transcript16');
+    turns.forEach((turn,i)=>{
+      _t(()=>{
+        const d=document.createElement('div');
+        d.style.cssText='display:flex;gap:8px;margin-bottom:10px;animation:akb-slide-in .3s ease;align-items:flex-start;';
+        d.innerHTML=`
+          <div style="font-size:.72rem;font-weight:700;color:${turn.who==='Rep'?'#c084fc':'#60a5fa'};min-width:52px;margin-top:2px;">${turn.who}</div>
+          <div style="flex:1;">
+            <div style="font-size:.82rem;color:#d1d5db;line-height:1.5;">${turn.text}</div>
+            ${turn.score?`<div class="akb-chip" style="background:${turn.score.color}20;color:${turn.score.color};margin-top:4px;">🤖 ${turn.score.label}</div>`:''}
+          </div>`;
+        t.appendChild(d);
+        t.scrollTop=t.scrollHeight;
+      },i*700+200);
+    });
+  };
+
+  BUILDERS[17] = function(body){
+    const props=[
+      {name:'The Penthouse — Marina Gate',price:'AED 4.2M',beds:'4 Bed',sqft:'3,200 sqft',badge:'Ready Now'},
+      {name:'Corner Villa — Al Barari',price:'AED 11.5M',beds:'6 Bed',sqft:'7,800 sqft',badge:'Off-Plan'},
+      {name:'Studio — Business Bay',price:'AED 950K',beds:'Studio',sqft:'620 sqft',badge:'Ready Now'},
+    ];
+    body.innerHTML=`
+      <div class="akb-card" style="margin-bottom:14px;">
+        <div class="akb-label">AI Avatar Tour System</div>
+        <div style="font-size:.84rem;color:#9ca3b0;margin-top:4px;">Each property gets a personalised narrated video tour — no film crew, no agent needed.</div>
+      </div>
+      ${props.map((p,i)=>`
+        <div class="akb-card" style="margin-bottom:12px;display:flex;align-items:center;gap:14px;">
+          <div style="min-width:80px;height:60px;border-radius:8px;background:linear-gradient(135deg,hsl(${210+i*20},40%,14%),hsl(${230+i*20},50%,20%));display:flex;align-items:center;justify-content:center;font-size:1.8rem;">🏙️</div>
+          <div style="flex:1;">
+            <div style="font-weight:700;font-size:.88rem;color:#fff;">${p.name}</div>
+            <div style="font-size:.78rem;color:#9ca3b0;margin-top:2px;">${p.beds} · ${p.sqft} · ${p.price}</div>
+            <div class="akb-chip ${p.badge==='Ready Now'?'akb-green':'akb-yellow'}" style="margin-top:4px;font-size:.7rem;">${p.badge}</div>
+          </div>
+          <button class="prop-play-btn" data-idx="${i}" id="propplaybtn${i}" style="background:#7c6af7;border:none;border-radius:8px;padding:8px 14px;color:#fff;font-size:.78rem;font-weight:700;cursor:pointer;white-space:nowrap;">▶ Play Tour</button>
+        </div>`).join('')}
+      <div class="akb-card" id="tourplayer17" style="display:none;margin-top:4px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#7c6af7,#a855f7);display:flex;align-items:center;justify-content:center;font-size:1.2rem;animation:akb-pulse 2s infinite;">🤖</div>
+          <div style="flex:1;">
+            <div style="font-size:.78rem;font-weight:700;color:#c084fc;">Aria — AI Property Narrator</div>
+            <div id="tourtext17" style="font-size:.82rem;color:#d1d5db;margin-top:4px;min-height:18px;"></div>
+          </div>
+        </div>
+        <div class="akb-progress-bar" style="margin-top:10px;"><div class="akb-progress-fill" id="tourprog17" style="width:0%;"></div></div>
+      </div>`;
+    document.querySelectorAll('.prop-play-btn').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const idx = btn.dataset.idx;
+        const player=document.getElementById('tourplayer17');
+        player.style.display='block';
+        document.getElementById('propplaybtn'+idx).textContent='▶ Playing…';
+        const texts=["Welcome to this stunning property. Let me walk you through every detail...","As you enter the grand foyer, you're greeted by 4-metre ceiling heights and floor-to-ceiling glass...","The chef's kitchen features Gaggenau appliances and an island perfect for entertaining...","The master suite spans 600 sqft with a walk-in wardrobe and his-and-hers bathrooms...","Step onto the private terrace — panoramic views stretch from the Marina to the Palm."];
+        let ti=0,prog=0;
+        const tt=document.getElementById('tourtext17');
+        const pb=document.getElementById('tourprog17');
+        function nextLine(){
+          if(ti>=texts.length) return;
+          tt.textContent='';
+          typewriter(tt,texts[ti++],28,()=>{_t(nextLine,600);});
+        }
+        nextLine();
+        _i(()=>{prog=Math.min(prog+0.5,100);pb.style.width=prog+'%';},80);
+      });
+    });
+  };
+
+  BUILDERS[18] = function(body){
+    const questions=[
+      {q:'What is the maximum discount a Sales Rep can offer without manager approval?',opts:['5%','10%','15%','20%'],correct:1},
+      {q:'Which CRM do we use for enterprise accounts?',opts:['Salesforce','HubSpot','Pipedrive','Zoho'],correct:1},
+    ];
+    let qi=0,score=0;
+    body.innerHTML=`
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <div><div class="akb-label">AI Onboarding · Day 1 Module</div><div style="font-size:.82rem;color:#9ca3b0;margin-top:2px;">Sales Playbook &amp; CRM Training</div></div>
+        <div class="akb-chip akb-purple" id="opscore18">Score: 0/2</div>
+      </div>
+      <div class="akb-card" style="margin-bottom:14px;">
+        <div class="akb-label">Overall Progress</div>
+        <div class="akb-progress-bar" style="margin-top:8px;"><div class="akb-progress-fill" id="onbprog18" style="width:22%;"></div></div>
+        <div style="display:flex;justify-content:space-between;font-size:.75rem;color:#6b7280;margin-top:4px;"><span>22% complete</span><span>Day 1 of 5</span></div>
+      </div>
+      <div class="akb-card" id="quizcard18">
+        <div class="akb-label" id="qnum18">Question 1 of 2</div>
+        <div style="font-size:.9rem;color:#e8eaf0;font-weight:600;margin:10px 0;" id="qtext18"></div>
+        <div id="qopts18" style="display:flex;flex-direction:column;gap:8px;"></div>
+        <div id="qfeedback18" style="margin-top:10px;font-size:.84rem;min-height:20px;"></div>
+      </div>`;
+    function loadQ(){
+      if(qi>=questions.length){
+        document.getElementById('quizcard18').innerHTML=`<div style="text-align:center;padding:20px;"><div style="font-size:2rem;margin-bottom:8px;">🎉</div><div style="font-weight:700;color:#fff;font-size:1rem;">Module Complete!</div><div style="font-size:.84rem;color:#9ca3b0;margin-top:4px;">Score: ${score}/${questions.length} · Great work!</div></div>`;
+        document.getElementById('onbprog18').style.width='38%';
+        return;
+      }
+      const q=questions[qi];
+      document.getElementById('qnum18').textContent=`Question ${qi+1} of ${questions.length}`;
+      document.getElementById('qtext18').textContent=q.q;
+      const opts=document.getElementById('qopts18');
+      opts.innerHTML='';
+      document.getElementById('qfeedback18').textContent='';
+      q.opts.forEach((o,i)=>{
+        const btn=document.createElement('button');
+        btn.style.cssText='background:#1e2130;border:1px solid #2a2d3a;border-radius:8px;padding:10px 14px;color:#d1d5db;font-size:.84rem;cursor:pointer;text-align:left;transition:all .2s;';
+        btn.textContent=`${String.fromCharCode(65+i)}. ${o}`;
+        btn.onmouseover=()=>btn.style.borderColor='#7c6af7';
+        btn.onmouseout=()=>btn.style.borderColor='#2a2d3a';
+        btn.onclick=()=>{
+          const correct=i===q.correct;
+          if(correct){score++;btn.style.borderColor='#34d399';btn.style.background='#0d2e1a';}
+          else{btn.style.borderColor='#f87171';btn.style.background='#2e0d0d';opts.children[q.correct].style.borderColor='#34d399';opts.children[q.correct].style.background='#0d2e1a';}
+          document.getElementById('qfeedback18').innerHTML=correct?'<span style="color:#34d399;">✓ Correct! Well done.</span>':'<span style="color:#f87171;">✗ Not quite. The AI has noted this for review.</span>';
+          document.getElementById('opscore18').textContent=`Score: ${score}/${qi+1}`;
+          Array.from(opts.children).forEach(b=>b.disabled=true);
+          qi++;
+          _t(loadQ,1400);
+        };
+        opts.appendChild(btn);
+      });
+    }
+    _t(loadQ,400);
+  };
+
+  BUILDERS[19] = function(body){
+    const prospects=[
+      {name:'David Chen',title:'VP of Sales',co:'ScaleFast Inc.',pain:'Growing SDR team costs'},
+      {name:'Amara Osei',title:'CEO',co:'Orbit Analytics',pain:'Low demo booking rate'},
+    ];
+    body.innerHTML=`
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;">
+        ${[['Prospects Found','1,240','akb-blue'],['Emails Sent','847','akb-purple'],['Meetings Booked','23','akb-green']].map(([l,v,c],i)=>`
+          <div class="akb-card" style="text-align:center;">
+            <div class="akb-label">${l}</div>
+            <div id="sdrcnt${i}" style="font-size:1.4rem;font-weight:800;color:#fff;margin-top:4px;">0</div>
+            <div class="akb-chip ${c}" style="margin-top:4px;font-size:.7rem;">${v}</div>
+          </div>`).join('')}
+      </div>
+      <div class="akb-card">
+        <div class="akb-label">Live Outreach — Personalisation in Action</div>
+        <div id="sdrfeed19" style="margin-top:8px;"></div>
+      </div>`;
+    [[1240,1600],[847,1400],[23,1800]].forEach(([v,d],i)=>_t(()=>countUp(document.getElementById('sdrcnt'+i),v,d),i*200));
+    const feed=document.getElementById('sdrfeed19');
+    prospects.forEach((p,i)=>{
+      _t(()=>{
+        const d=document.createElement('div');
+        d.style.cssText='border-top:1px solid #1e2130;padding:12px 0;animation:akb-slide-in .3s ease;';
+        d.innerHTML=`
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+            <div>
+              <span style="font-weight:700;color:#fff;">${p.name}</span>
+              <span style="font-size:.78rem;color:#6b7280;"> · ${p.title}, ${p.co}</span>
+            </div>
+            <div class="akb-chip akb-blue">Drafting…</div>
+          </div>
+          <div style="background:#161a27;border-radius:8px;padding:12px;border-left:3px solid #7c6af7;">
+            <div style="font-size:.75rem;color:#6b7280;margin-bottom:6px;">AI-generated personalised email:</div>
+            <div style="font-size:.82rem;color:#d1d5db;line-height:1.6;" id="sdremail${i}"></div>
+          </div>`;
+        feed.appendChild(d);
+        const emailEl=document.getElementById('sdremail'+i);
+        const emailText=`Subject: ${p.pain} — saw your post about scaling\n\nHi ${p.name.split(' ')[0]}, I noticed ${p.co} is hiring SDRs — we help companies like yours replace that entire function with an AI outbound agent that books 20+ meetings/month. Worth a 15-min call this week?`;
+        _t(()=>typewriter(emailEl,emailText,18),200);
+      },i*1800+600);
+    });
+  };
+
+  BUILDERS[20] = function(body){
+    const docs=['Sales Playbook v3.2.pdf','Onboarding SOP.docx','Pricing Guide Q2 2025.pdf','Client Contract Template.pdf','Objection Handling Manual.docx'];
+    const qna=[
+      {q:'What\'s the refund policy for annual plans?',a:'Annual plans are eligible for a pro-rata refund within the first 30 days. After 30 days, credits are issued for the unused period. Source: Client Contract Template §4.2'},
+      {q:'How do I escalate a tier-2 support case?',a:'Tier-2 cases should be escalated via the #support-escalations Slack channel with the ticket ID and a 2-line summary. SLA for response is 4 business hours. Source: Onboarding SOP §7.1'},
+    ];
+    let qi=0;
+    body.innerHTML=`
+      <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;">
+        ${docs.map(d=>`<div class="akb-chip akb-blue" style="font-size:.75rem;">📄 ${d}</div>`).join('')}
+      </div>
+      <div class="akb-card" style="max-height:260px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;" id="kbchat20"></div>
+      <div style="display:flex;gap:8px;margin-top:10px;">
+        <div style="flex:1;background:#161a27;border:1px solid #2a2d3a;border-radius:8px;padding:10px;font-size:.82rem;color:#9ca3b0;" id="kbinput20">${qna[0].q}</div>
+        <button id="kbsend20" style="background:#7c6af7;border:none;border-radius:8px;padding:10px 16px;color:#fff;font-size:.82rem;font-weight:700;cursor:pointer;">Ask</button>
+      </div>`;
+    const chat=document.getElementById('kbchat20');
+    function addMsg(who,text,cb){
+      const d=document.createElement('div');
+      d.style.cssText=`display:flex;justify-content:${who==='user'?'flex-end':'flex-start'};animation:akb-slide-in .3s ease;`;
+      const inner=document.createElement('div');
+      inner.className='akb-chat-bubble';
+      inner.style.cssText=`background:${who==='user'?'#1e1040':'#161a27'};color:#e8eaf0;border:1px solid ${who==='user'?'#7c6af730':'#2a2d3a'};max-width:90%;`;
+      d.appendChild(inner);
+      chat.appendChild(d);
+      chat.scrollTop=chat.scrollHeight;
+      if(who==='ai'){
+        typewriter(inner,text,20,cb);
+      } else {
+        inner.textContent=text;
+        if(cb) cb();
+      }
+    }
+    function kbSend(){
+      if(qi>=qna.length) return;
+      const pair=qna[qi++];
+      addMsg('user',pair.q,()=>{
+        _t(()=>addMsg('ai',pair.a,()=>{
+          if(qi<qna.length) document.getElementById('kbinput20').textContent=qna[qi].q;
+        }),600);
+      });
+    }
+    document.getElementById('kbsend20').addEventListener('click', kbSend);
+    _t(kbSend,600);
+  };
+
+})();
+</script>
+
+</body>
+</html>
+
