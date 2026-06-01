@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -1649,7 +1649,8 @@ button { font-family: inherit; }
     <button id="aikab-close-btn" style="background:#1e2130;border:none;color:#9ca3b0;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:background .2s;">&#10005;</button>
   </div>
   <div id="aikab-modal-body" style="padding:24px;"></div>
-  <div style="padding:0 24px 24px;">
+  <div id="aikab-modal-footer" style="padding:0 24px 24px; display:flex; flex-direction:column; gap:12px;">
+    <button id="aikab-experience-btn" style="display:none; width:100%;padding:14px;background:#1e2130;border:1px solid #7c6af7;border-radius:10px;color:#fff;font-size:.95rem;font-weight:700;cursor:pointer;letter-spacing:.03em;transition:all .2s;font-family:'Space Grotesk',sans-serif;">Experience This Live ✨</button>
     <button id="aikab-cta-btn" style="width:100%;padding:14px;background:linear-gradient(135deg,#7c6af7,#a855f7);border:none;border-radius:10px;color:#fff;font-size:.95rem;font-weight:700;cursor:pointer;letter-spacing:.03em;transition:opacity .2s;font-family:'Space Grotesk',sans-serif;">Get This For My Business &rarr;</button>
   </div>
 </div>
@@ -2197,14 +2198,164 @@ button { font-family: inherit; }
     document.getElementById('aikab-modal-badge').textContent = s.badge;
     document.getElementById('aikab-modal-title').textContent = s.title;
     document.getElementById('aikab-modal-body').innerHTML = '';
+    
+    const expBtn = document.getElementById('aikab-experience-btn');
+    if(expBtn) expBtn.style.display = (serviceId === 1) ? 'block' : 'none';
+    
     document.getElementById('aikab-overlay').style.display='block';
     document.getElementById('aikab-modal').style.display='block';
     document.body.style.overflow='hidden';
     const builder = BUILDERS[serviceId];
     if(builder) builder(document.getElementById('aikab-modal-body'));
   };
+  
+  window.aikabExperienceLive = function(){
+    clearAllTimers();
+    const body = document.getElementById('aikab-modal-body');
+    body.innerHTML = `
+      <div class="akb-card" id="demo-step-1">
+        <h3 style="margin-top:0; color:#fff;">Experience AI Voice Calling</h3>
+        <p style="font-size:0.9rem; color:#9ca3b0; margin-bottom: 20px;">Choose how you want to test the AI agent.</p>
+        
+        <div style="display:flex; gap:10px; margin-bottom: 20px;">
+          <button id="btn-outbound" style="flex:1; padding:12px; background:#1e2130; border:1px solid #7c6af7; border-radius:8px; color:#fff; cursor:pointer;">Call Me (Outbound)</button>
+          <button id="btn-inbound" style="flex:1; padding:12px; background:#1e2130; border:1px solid #2a2d3a; border-radius:8px; color:#fff; cursor:pointer;">I'll Call (Inbound)</button>
+        </div>
+
+        <div style="margin-bottom: 15px;">
+          <label style="display:block; font-size:0.85rem; color:#9ca3b0; margin-bottom:5px;">Your Phone Number (with Country Code)</label>
+          <input type="text" id="phone-input" placeholder="+1234567890" style="width:100%; padding:10px; border-radius:6px; border:1px solid #2a2d3a; background:#0f1117; color:#fff; box-sizing:border-box;">
+        </div>
+
+        <button id="btn-send-otp" style="width:100%; padding:12px; background:linear-gradient(135deg,#7c6af7,#a855f7); border:none; border-radius:8px; color:#fff; font-weight:bold; cursor:pointer;">Send Verification Code</button>
+        <div id="demo-error-1" style="color:#f87171; font-size:0.85rem; margin-top:10px; display:none;"></div>
+      </div>
+
+      <div class="akb-card" id="demo-step-2" style="display:none;">
+        <h3 style="margin-top:0; color:#fff;">Verify Your Number</h3>
+        <p style="font-size:0.9rem; color:#9ca3b0; margin-bottom: 20px;">Enter the 4-digit code sent to your phone.</p>
+        
+        <div style="margin-bottom: 15px;">
+          <input type="text" id="otp-input" placeholder="1234" style="width:100%; padding:10px; border-radius:6px; border:1px solid #2a2d3a; background:#0f1117; color:#fff; text-align:center; letter-spacing:4px; font-size:1.2rem; box-sizing:border-box;">
+        </div>
+
+        <button id="btn-verify-otp" style="width:100%; padding:12px; background:linear-gradient(135deg,#7c6af7,#a855f7); border:none; border-radius:8px; color:#fff; font-weight:bold; cursor:pointer;">Verify & Start Demo</button>
+        <div id="demo-error-2" style="color:#f87171; font-size:0.85rem; margin-top:10px; display:none;"></div>
+      </div>
+
+      <div class="akb-card" id="demo-step-3" style="display:none; text-align:center; padding:30px 20px;">
+        <div id="demo-success-icon" style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#7c6af7,#a855f7);margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:2rem;box-shadow:0 0 32px rgba(124,106,247,.5);animation:akb-pulse 2s infinite;">📞</div>
+        <h3 id="demo-success-title" style="margin-top:0; color:#fff;">Calling you now...</h3>
+        <p id="demo-success-desc" style="font-size:0.95rem; color:#9ca3b0; line-height:1.5;">Our AI Agent is dialing your number. Please answer the call to experience the demo.</p>
+      </div>
+    `;
+
+    document.getElementById('aikab-experience-btn').style.display = 'none';
+
+    let callMode = 'outbound';
+    let phoneNumber = '';
+    const API_BASE = '/api';
+
+    const btnOutbound = document.getElementById('btn-outbound');
+    const btnInbound = document.getElementById('btn-inbound');
+    const btnSendOtp = document.getElementById('btn-send-otp');
+    const btnVerifyOtp = document.getElementById('btn-verify-otp');
+    
+    btnOutbound.onclick = () => {
+      callMode = 'outbound';
+      btnOutbound.style.borderColor = '#7c6af7';
+      btnInbound.style.borderColor = '#2a2d3a';
+    };
+    
+    btnInbound.onclick = () => {
+      callMode = 'inbound';
+      btnInbound.style.borderColor = '#7c6af7';
+      btnOutbound.style.borderColor = '#2a2d3a';
+    };
+
+    btnSendOtp.onclick = async () => {
+      phoneNumber = document.getElementById('phone-input').value.trim();
+      const errEl = document.getElementById('demo-error-1');
+      if(!phoneNumber) {
+        errEl.textContent = 'Please enter a valid phone number.';
+        errEl.style.display = 'block';
+        return;
+      }
+      errEl.style.display = 'none';
+      btnSendOtp.textContent = 'Sending...';
+      btnSendOtp.disabled = true;
+
+      try {
+        const res = await fetch(`${API_BASE}/send-otp`, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ phoneNumber })
+        });
+        const data = await res.json();
+        
+        if(data.success) {
+          document.getElementById('demo-step-1').style.display = 'none';
+          document.getElementById('demo-step-2').style.display = 'block';
+        } else {
+          throw new Error(data.error || 'Failed to send OTP');
+        }
+      } catch (err) {
+        errEl.textContent = err.message;
+        errEl.style.display = 'block';
+        btnSendOtp.textContent = 'Send Verification Code';
+        btnSendOtp.disabled = false;
+      }
+    };
+
+    btnVerifyOtp.onclick = async () => {
+      const otp = document.getElementById('otp-input').value.trim();
+      const errEl = document.getElementById('demo-error-2');
+      if(!otp) {
+        errEl.textContent = 'Please enter the OTP.';
+        errEl.style.display = 'block';
+        return;
+      }
+      errEl.style.display = 'none';
+      btnVerifyOtp.textContent = 'Verifying...';
+      btnVerifyOtp.disabled = true;
+
+      try {
+        const res = await fetch(`${API_BASE}/verify-otp`, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ phoneNumber, otp })
+        });
+        const data = await res.json();
+        
+        if(!data.success) throw new Error(data.error || 'Invalid OTP');
+
+        document.getElementById('demo-step-2').style.display = 'none';
+        document.getElementById('demo-step-3').style.display = 'block';
+
+        if(callMode === 'outbound') {
+          await fetch(`${API_BASE}/trigger-call`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ phoneNumber })
+          });
+        } else {
+          const cfgRes = await fetch(`${API_BASE}/config`);
+          const cfgData = await cfgRes.json();
+          document.getElementById('demo-success-title').textContent = 'Ready for your call';
+          document.getElementById('demo-success-desc').innerHTML = `Please dial this number from your verified phone:<br><strong style="color:#fff; font-size:1.5rem; display:block; margin-top:15px;">${cfgData.inboundPhoneNumber}</strong>`;
+        }
+      } catch (err) {
+        errEl.textContent = err.message;
+        errEl.style.display = 'block';
+        btnVerifyOtp.textContent = 'Verify & Start Demo';
+        btnVerifyOtp.disabled = false;
+      }
+    };
+  };
+
   window.aikabCloseModal = function(){
     clearAllTimers();
+    if(window.speechSynthesis) window.speechSynthesis.cancel();
     document.getElementById('aikab-overlay').style.display='none';
     document.getElementById('aikab-modal').style.display='none';
     document.body.style.overflow='';
@@ -2216,6 +2367,9 @@ button { font-family: inherit; }
   document.getElementById('aikab-overlay').addEventListener('click', window.aikabCloseModal);
   document.getElementById('aikab-close-btn').addEventListener('click', window.aikabCloseModal);
   document.getElementById('aikab-cta-btn').addEventListener('click', window.aikabCTA);
+  if(document.getElementById('aikab-experience-btn')) {
+    document.getElementById('aikab-experience-btn').addEventListener('click', window.aikabExperienceLive);
+  }
 
   document.addEventListener('click', function(e){
     const btn = e.target.closest('[data-service]');
@@ -2244,36 +2398,82 @@ button { font-family: inherit; }
   const BUILDERS = {};
 
   BUILDERS[1] = function(body){
+    let voiceOn = true;
+
+    // Preload voices (Chrome lazy-loads them)
+    if(window.speechSynthesis) window.speechSynthesis.getVoices();
+
+    function pickVoice(preferFemale){
+      const voices = window.speechSynthesis.getVoices();
+      const en = voices.filter(v => v.lang.startsWith('en'));
+      const female = en.find(v => /zira|jenny|samantha|google us english|aria|susan/i.test(v.name));
+      const male   = en.find(v => /david|mark|guy|james|google uk english male/i.test(v.name));
+      if(preferFemale) return female || en[0] || voices[0];
+      return male || en[1] || en[0] || voices[0];
+    }
+
     body.innerHTML = `
       <div class="akb-card" style="text-align:center;margin-bottom:16px;">
         <div style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#7c6af7,#a855f7);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:2rem;box-shadow:0 0 32px rgba(124,106,247,.5);animation:akb-pulse 2s infinite;">📞</div>
         <div style="font-size:.8rem;color:#9ca3b0;">AI Agent calling <strong style="color:#fff;">Sarah Mitchell</strong> · Inbound Sales</div>
         <div class="akb-chip akb-green" style="margin-top:8px;">● LIVE · 02:14</div>
         <div class="akb-waveform" style="justify-content:center;margin:14px auto 0;" id="wv1">${waveformHTML(24)}</div>
+        <button id="voiceToggleBtn1" style="margin-top:12px;background:rgba(124,106,247,.18);border:1px solid rgba(124,106,247,.4);color:#c084fc;border-radius:20px;padding:5px 16px;font-size:.78rem;cursor:pointer;letter-spacing:.03em;">🔊 Voice On</button>
       </div>
       <div class="akb-card">
         <div class="akb-label">Live Transcript</div>
         <div id="transcript1" style="font-size:.84rem;line-height:1.8;min-height:120px;"></div>
       </div>`;
-    const lines=[
-      {speaker:'AI Agent',color:'#c084fc',text:'Hi Sarah! Thanks for reaching out to BrightCo. I\'m Aria, your AI sales advisor. How can I help you today?'},
-      {speaker:'Sarah',color:'#60a5fa',text:'Hey, yeah — I was checking out your pricing page and had a few questions about the Pro plan.'},
-      {speaker:'AI Agent',color:'#c084fc',text:'Absolutely! The Pro plan at $299/mo includes unlimited seats, full API access, and priority support. What specifically caught your eye?'},
-      {speaker:'Sarah',color:'#60a5fa',text:'Mostly the CRM integrations. We\'re on HubSpot.'},
-      {speaker:'AI Agent',color:'#c084fc',text:'Perfect — we have a native HubSpot bi-directional sync. I can schedule a 20-minute demo for you this week. Tuesday 2pm or Thursday 10am work?'},
-    ];
-    const t=document.getElementById('transcript1');
-    let delay=400;
-    lines.forEach(l=>{
-      _t(()=>{
-        const row=document.createElement('div');
-        row.style.cssText='margin-bottom:8px;animation:akb-slide-in .3s ease;';
-        row.innerHTML=`<span style="color:${l.color};font-weight:700;font-size:.78rem;">${l.speaker}: </span><span style="color:#d1d5db;">${l.text}</span>`;
-        t.appendChild(row);
-        t.scrollTop=t.scrollHeight;
-      },delay);
-      delay+=l.text.length*28+600;
+
+    document.getElementById('voiceToggleBtn1').addEventListener('click', function(){
+      voiceOn = !voiceOn;
+      this.textContent = voiceOn ? '🔊 Voice On' : '🔇 Voice Off';
+      this.style.color = voiceOn ? '#c084fc' : '#6b7280';
+      this.style.borderColor = voiceOn ? 'rgba(124,106,247,.4)' : 'rgba(107,114,128,.3)';
+      if(!voiceOn) window.speechSynthesis.cancel();
     });
+
+    const lines=[
+      {speaker:'AI Agent',color:'#c084fc',female:true, text:'Hi Sarah! Thanks for reaching out to BrightCo. I\'m Aria, your AI sales advisor. How can I help you today?'},
+      {speaker:'Sarah',  color:'#60a5fa',female:false,text:'Hey, yeah — I was checking out your pricing page and had a few questions about the Pro plan.'},
+      {speaker:'AI Agent',color:'#c084fc',female:true, text:'Absolutely! The Pro plan at $299/mo includes unlimited seats, full API access, and priority support. What specifically caught your eye?'},
+      {speaker:'Sarah',  color:'#60a5fa',female:false,text:'Mostly the CRM integrations. We\'re on HubSpot.'},
+      {speaker:'AI Agent',color:'#c084fc',female:true, text:'Perfect — we have a native HubSpot bi-directional sync. I can schedule a 20-minute demo for you this week. Tuesday 2pm or Thursday 10am work?'},
+    ];
+
+    const t = document.getElementById('transcript1');
+
+    // Event-driven: each line appears when the previous utterance finishes,
+    // so voice and transcript stay perfectly in sync.
+    function showLine(index){
+      const modal = document.getElementById('aikab-modal');
+      if(!modal || modal.style.display === 'none') return;
+      if(index >= lines.length) return;
+
+      const l = lines[index];
+      const row = document.createElement('div');
+      row.style.cssText = 'margin-bottom:8px;animation:akb-slide-in .3s ease;';
+      row.innerHTML = `<span style="color:${l.color};font-weight:700;font-size:.78rem;">${l.speaker}: </span><span style="color:#d1d5db;">${l.text}</span>`;
+      t.appendChild(row);
+      t.scrollTop = t.scrollHeight;
+
+      if(voiceOn && window.speechSynthesis){
+        const u = new SpeechSynthesisUtterance(l.text);
+        const v = pickVoice(l.female);
+        if(v) u.voice = v;
+        u.rate   = l.female ? 1.08 : 1.0;
+        u.pitch  = l.female ? 1.15 : 0.88;
+        u.volume = 1.0;
+        // Advance to next line only after this utterance fully finishes
+        u.onend = () => _t(() => showLine(index + 1), 300);
+        window.speechSynthesis.speak(u);
+      } else {
+        // Voice off: use text-length-based timer fallback
+        _t(() => showLine(index + 1), l.text.length * 28 + 600);
+      }
+    }
+
+    _t(() => showLine(0), 500);
   };
 
   BUILDERS[2] = function(body){
